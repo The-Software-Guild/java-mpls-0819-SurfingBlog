@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Role {
 
     private int id;
-    private String role;
+    private String roleName;
 
     public int getId() {
         return id;
@@ -25,18 +25,18 @@ public class Role {
     }
 
     public String getRole() {
-        return role;
+        return roleName;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.roleName = role;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.role);
+        hash = 97 * hash + Objects.hashCode(this.roleName);
         return hash;
     }
 
@@ -55,7 +55,7 @@ public class Role {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.role, other.role)) {
+        if (!Objects.equals(this.roleName, other.roleName)) {
             return false;
         }
         return true;
