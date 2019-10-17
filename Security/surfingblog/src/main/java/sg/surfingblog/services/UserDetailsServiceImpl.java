@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         
         Set<GrantedAuthority> convertedRoles = new HashSet<GrantedAuthority>();
         
-        toLoad.getRoles().stream().forEach(r -> convertedRoles.add(new SimpleGrantedAuthority(r.getRole())));
+        toLoad.getRoles().stream().forEach(r -> convertedRoles.add(new SimpleGrantedAuthority(r.getrName())));
         
         return new User(userName, toLoad.getPassword(), convertedRoles);
         

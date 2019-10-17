@@ -198,7 +198,7 @@ public class UserDbDao implements UserDao {
 
         String updateStatement = "UPDATE role SET role = ? WHERE Id = ?";
 
-        int updateRowsAffected = jdbc.update(updateStatement, role.getRole(), role.getId());
+        int updateRowsAffected = jdbc.update(updateStatement, role.getrName(), role.getId());
 
         //Check that rows affected = 1
     }
@@ -210,7 +210,7 @@ public class UserDbDao implements UserDao {
         
         String insertStatement = "INSERT INTO Role (role) VALUES (?)";
 
-        int insertRows = jdbc.update(insertStatement, role.getRole());
+        int insertRows = jdbc.update(insertStatement, role.getrName());
 
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
 
@@ -242,7 +242,7 @@ public class UserDbDao implements UserDao {
             Role toReturn = new Role();
 
             toReturn.setId(results.getInt("id"));
-            toReturn.setRole(results.getString("role"));
+            toReturn.setrName(results.getString("role"));
 
             return toReturn;
 
