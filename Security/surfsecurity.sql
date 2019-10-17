@@ -30,63 +30,53 @@ isActive boolean not null);
 create table break(
 `id` int primary key auto_increment, 
 `name` varchar(50) not null, 
+`beachId` int not null, 
 latitude decimal(9,6), 
-longitude decimal(9,6));
-
-create table break_comment(
-`id` int primary key auto_increment,
-userId int not null,
-
-Foreign Key fk_break_comment_user(userId)
-references `user`(`id`),
-
-breakId int not null,
-
-Foreign Key fk_break_comment_break(breakId)
-references break(`id`),
-
-`comment` varchar(1000) not null);
+longitude decimal(9,6),
+foreign key fk_break_beach(beachId)
+references beach(`id`)
+);
 
 create table beach (
 `id`        int             primary key auto_increment,
 `name`      varchar(30)     not null,
-`zipcode`   int(5)          not null,
-`breakId`   int             not null, 
-foreign key (`breakId`) references break(`id`)
-);
-create table beach_comments (
-`id`        int             primary key auto_increment,
-userId      int             not null,
-beachid     int             not null,
-comment     varchar(1000)   not null,
-foreign key (userId) references `user`(`id`),
-foreign key (beachId) references beach(`id`)
+`zipcode`   int(5)          not null
 );
 
-create table Beaches (
-`id` 		int 			primary key auto_increment,
-`name` 		varchar(30)		not null,
-`zipcode` 	int(5) 			not null,
-`breakid` 	int 			not null, 
 
-foreign key (`breakid`) references Breaks(`id`)
+create table comment (
+`id` 			int 			primary key auto_increment,
+`breakid`		int, 			
+`beachid`		int				not null,
+isbreakcomment 	boolean 		not null default false,
+comment     	varchar(1000)   not null,
 
+foreign key (`breakid`) references break(`id`),
+foreign key (`beachid`) references beach(`id`)
 );
 
-create table BeachComments (
-`id`		int 			primary key auto_increment,
-userId		int 			not null,
-beachid		int 			not null,
-comment		varchar(1000)	not null,
+-- create table break_comment(
+-- `id` int primary key auto_increment,
+-- userId int not null,
 
-foreign key (userId) references `user`(`id`),
-foreign key (beachId) references Beaches(`id`)
+-- Foreign Key fk_break_comment_user(userId)
+-- references `user`(`id`),
 
-);
+-- breakId int not null,
 
-create table Breaks (
-`id`		int 			primary key
-);
+-- Foreign Key fk_break_comment_break(breakId)
+-- references break(`id`),
+
+-- `comment` varchar(1000) not null);
+
+-- create table beach_comments (
+-- `id`        int             primary key auto_increment,
+-- userId      int             not null,
+-- beachid     int             not null,
+-- comment     varchar(1000)   not null,
+-- foreign key (userId) references `user`(`id`),
+-- foreign key (beachId) references beach(`id`)
+-- );
 
 insert into `user`(`id`,`username`,`password`,`enabled`)
     values(1,"admin", "$2a$10$Pwyf0jn0glXZ36Nvo0GBtuUdl0Y5OoXV7izp2/Mi6YGvx3YY4Zcmi", true),
@@ -97,3 +87,4 @@ insert into `role`(`id`,`role`)
     
 insert into `user_role`(`user_id`,`role_id`)
     values(1,1),(1,2),(2,2);
+    
