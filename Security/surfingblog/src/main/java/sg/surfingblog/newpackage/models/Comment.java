@@ -9,9 +9,12 @@ package sg.surfingblog.newpackage.models;
  *
  * @author Chad
  */
-public class Comments {
+public class Comment {
     
     private int id;
+    private Beach beach;
+    private Break commentBreak;
+    private boolean isbreak;
     private SiteUser user;
     private String commentText;
 
@@ -37,6 +40,31 @@ public class Comments {
 
     public void setCommentText(String commentText) {
         this.commentText = commentText;
+    }
+
+    public Beach getBeach() {
+        return beach;
+    }
+
+    public void setBeach(Beach beach) {
+        this.beach = beach;
+    }
+
+    public Break getCommentBreak() {
+        return commentBreak;
+    }
+
+    public void setCommentBreak(Break commentBreak) {
+        this.commentBreak = commentBreak;
+    }
+
+    public boolean getIsbreak() {
+        return isbreak;
+    }
+
+
+    public void setIsbreak(boolean isbreak) {
+        this.isbreak = isbreak;
     }
     
     
