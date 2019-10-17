@@ -9,7 +9,7 @@ package sg.surfingblog.newpackage.models;
  *
  * @author Chad
  */
-public class HomepageNews {
+public class News {
     
     private int id;
     private String newsURL;

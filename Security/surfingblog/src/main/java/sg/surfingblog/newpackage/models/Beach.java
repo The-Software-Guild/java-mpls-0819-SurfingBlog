@@ -16,7 +16,7 @@ public class Beach {
     private int id;
     private String name;
     private int zipCode;
-    private List<Break> beachBreaks;
+    //private List<Break> beachBreaks;
 
     public int getId() {
         return id;
@@ -40,14 +40,6 @@ public class Beach {
 
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public List<Break> getBeachBreaks() {
-        return beachBreaks;
-    }
-
-    public void setBeachBreaks(List<Break> beachBreaks) {
-        this.beachBreaks = beachBreaks;
     }
    
 }

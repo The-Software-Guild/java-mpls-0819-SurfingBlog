@@ -16,6 +16,7 @@ public class Break {
     
     private int id;
     private String name;
+    private Beach beach;
     private BigDecimal latitude;
     private BigDecimal longitude;
 
@@ -50,9 +51,14 @@ public class Break {
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
-    
-    
-    
-    
+
+    public Beach getBeach() {
+        return beach;
+    }
+
+    public void setBeach(Beach beach) {
+        this.beach = beach;
+    }
+     
     
 }
