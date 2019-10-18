@@ -7,17 +7,30 @@ package sg.surfingblog.newpackage.models;
 
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Chad
  */
+
 public class SiteUser {
-    
+
     private int id;
+
     private String username;
-    private String password;
+
+    private String password;   
+
     private boolean enabled;
+
     private Set<Role> roles;
 
     public int getId() {
@@ -60,8 +73,7 @@ public class SiteUser {
         this.roles = roles;
     }
 
-    
-  @Override
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 89 * hash + this.id;
@@ -72,25 +84,33 @@ public class SiteUser {
         return hash;
     }
 
-    @Override 
-    public boolean equals(Object other){
-        
-        if (this == other) return true;
-        if (other == null) return false;
-        if (this.getClass()!= other.getClass()) return false;
-        
-        final SiteUser that = (SiteUser)other;
-        
-        if(this.getId()!= that.getId()) return false;
-        if(!this.getPassword().equals(that.getPassword())) return false;
-        if(!this.getUsername().equals(that.getUsername())) return false;
-        
-        return Objects.equals(this.getRoles(), that.getRoles() );
-        
-    }
-    
-    
-    
+    @Override
+    public boolean equals(Object other) {
 
-    
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (this.getClass() != other.getClass()) {
+            return false;
+        }
+
+        final SiteUser that = (SiteUser) other;
+
+        if (this.getId() != that.getId()) {
+            return false;
+        }
+        if (!this.getPassword().equals(that.getPassword())) {
+            return false;
+        }
+        if (!this.getUsername().equals(that.getUsername())) {
+            return false;
+        }
+
+        return Objects.equals(this.getRoles(), that.getRoles());
+
+    }
+
 }

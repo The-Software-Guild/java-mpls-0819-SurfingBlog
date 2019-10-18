@@ -1,7 +1,7 @@
-drop database if exists surfblogdb;
-create database surfblogdb;
+drop database if exists surfblogtestdb;
+create database surfblogtestdb;
 
-use surfblogdb;
+use surfblogtestdb;
 
 create table `user`(
 `id` int primary key auto_increment,
@@ -148,10 +148,3 @@ values
 ('1018','2','303','quis nostrud exercitation ullamco laboris nisi'),
 ('1019','2','301','tempora incidunt'),
 ('1020','2','301','quis nostrud ut aliquip');
-
-
-
-
-
-
-    

@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,6 @@ import sg.surfingblog.newpackage.models.SiteUser;
  *
  * @author Chad
  */
-
 @Component
 public class UserDbDao implements UserDao {
 
@@ -30,14 +30,21 @@ public class UserDbDao implements UserDao {
     JdbcTemplate jdbc;
 
     @Override
-    public SiteUser getUserById(int id) {
+    public SiteUser getUserById(int id) throws InvalidIdException  {
 
         String select = "SELECT id, username, password, enabled FROM user WHERE id = ?";
 
-        SiteUser toReturn = jdbc.queryForObject(select, new UserMapper(), id);
+        SiteUser toReturn = null;
+        try {
+            toReturn = jdbc.queryForObject(select, new UserMapper(), id);
+        } catch (EmptyResultDataAccessException ex) {
+        }
+
+        if (toReturn == null) {
+            throw new InvalidIdException("Invalid User Id.");
+        }
 
         Set<Role> userRoles = getRolesForUser(id);
-
         toReturn.setRoles(userRoles);
 
         return toReturn;
@@ -205,9 +212,9 @@ public class UserDbDao implements UserDao {
 
     @Override
     @Transactional
-    
+
     public Role createRole(Role role) {
-        
+
         String insertStatement = "INSERT INTO Role (role) VALUES (?)";
 
         int insertRows = jdbc.update(insertStatement, role.getRole());
@@ -215,10 +222,9 @@ public class UserDbDao implements UserDao {
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
 
         role.setId(newId);
-        
+
         return role;
-        
-        
+
     }
 
     public static final class UserMapper implements RowMapper<SiteUser> {

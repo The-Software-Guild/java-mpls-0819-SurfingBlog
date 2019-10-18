@@ -15,7 +15,7 @@ import sg.surfingblog.newpackage.models.SiteUser;
  */
 public interface UserDao {
     
-    SiteUser getUserById(int id);
+    SiteUser getUserById(int id) throws InvalidIdException;
     SiteUser getUserByUsername(String username);
     //May be able to delete
     List<SiteUser> getAllUsers();
