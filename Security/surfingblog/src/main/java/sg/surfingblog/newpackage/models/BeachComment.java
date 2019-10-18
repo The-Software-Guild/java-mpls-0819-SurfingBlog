@@ -5,7 +5,6 @@
  */
 package sg.surfingblog.newpackage.models;
 
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,23 +12,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.springframework.security.core.userdetails.User;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Chad
  */
-public class Break {
+public class BeachComment {
 
     private int id;
 
-    private String name;
+    private SiteUser user;
 
     private Beach beach;
 
-    private BigDecimal latitude;
-
-    private BigDecimal longitude;
+    private String commentText;
 
     /**
      * @return the id
@@ -46,17 +43,17 @@ public class Break {
     }
 
     /**
-     * @return the name
+     * @return the user
      */
-    public String getName() {
-        return name;
+    public SiteUser getUser() {
+        return user;
     }
 
     /**
-     * @param name the name to set
+     * @param user the user to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(SiteUser user) {
+        this.user = user;
     }
 
     /**
@@ -74,31 +71,17 @@ public class Break {
     }
 
     /**
-     * @return the latitude
+     * @return the commentText
      */
-    public BigDecimal getLatitude() {
-        return latitude;
+    public String getCommentText() {
+        return commentText;
     }
 
     /**
-     * @param latitude the latitude to set
+     * @param commentText the commentText to set
      */
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
-    }
-
-    /**
-     * @return the longitude
-     */
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
-
-    /**
-     * @param longitude the longitude to set
-     */
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 
 }

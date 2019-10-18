@@ -8,7 +8,8 @@ package sg.surfingblog.newpackage.dao;
 import java.util.List;
 import sg.surfingblog.newpackage.models.Beach;
 import sg.surfingblog.newpackage.models.Break;
-import sg.surfingblog.newpackage.models.Comment;
+import sg.surfingblog.newpackage.models.BeachComment;
+import sg.surfingblog.newpackage.models.BreakComment;
 import sg.surfingblog.newpackage.models.News;
 
 /**
@@ -19,48 +20,59 @@ public interface SurfingDao {
     
     List<Break> getBreaksByBeach(int id);
     
-    List<Comment> getCommentsByBeach(int id);
+    List<BeachComment> getCommentsByBeach(int id);
     
-    List<Comment> getCommentsByBreak(int id);
+    List<BreakComment> getCommentsByBreak(int id);
 
     List<News> getAllActiveNews();
 
-    News getNewsById(int id);
+    News getNewsById(int id) throws InvalidIdException;
 
-    News addNews(News toAdd);
+    News addNews(News toAdd) throws SurfingDaoException;
 
-    void updateNews(News updatedNews);
+    void updateNews(News updatedNews) throws SurfingDaoException, InvalidIdException;
 
-    void deleteNews(int id);
+    void deleteNews(int id) throws InvalidIdException;
 
     List<Beach> getAllBeaches();
 
-    Beach getBeachById(int id);
+    Beach getBeachById(int id) throws InvalidIdException;
 
-    Beach addBeach(Beach toAdd);
+    Beach addBeach(Beach toAdd) throws SurfingDaoException;
 
-    void updateBeach(Beach updatedBeach);
+    void updateBeach(Beach updatedBeach) throws SurfingDaoException, InvalidIdException;
 
-    void deleteBeach(int id);
+    void deleteBeach(int id) throws InvalidIdException;
 
     List<Break> getAllBreaks();
 
-    Break getBreakById(int id);
+    Break getBreakById(int id) throws InvalidIdException;
 
-    Break addBreak(News toAdd);
+    Break addBreak(Break toAdd) throws SurfingDaoException, InvalidIdException;
 
-    void updateBreak(News updatedNews);
+    void updateBreak(Break updatedBreak) throws SurfingDaoException, InvalidIdException;
 
-    void deleteBreak(int id);
+    void deleteBreak(int id) throws InvalidIdException;
 
-    List<Comment> getAllComments();
+    List<BeachComment> getAllBeachComments();
 
-    Comment getCommentById(int id);
+    BeachComment getBeachCommentById(int id) throws InvalidIdException;
 
-    Comment addComment(News toAdd);
+    BeachComment addBeachComment(BeachComment toAdd) throws SurfingDaoException, InvalidIdException;
 
-    void updateComment(News updatedNews);
+    void updateBeachComment(BeachComment updatedBeachComment) throws SurfingDaoException, InvalidIdException;
 
-    void deleteComment(int id);
+    void deleteBeachComment(int id) throws InvalidIdException;
+    
+    List<BreakComment> getAllBreakComments();
+
+    BreakComment getBreakCommentById(int id) throws InvalidIdException;
+
+    BreakComment addBreakComment(BreakComment toAdd) throws SurfingDaoException, InvalidIdException;
+
+    void updateBreakComment(BreakComment updatedBreakComment) throws SurfingDaoException, InvalidIdException ;
+
+    void deleteBreakComment(int id) throws InvalidIdException;
 
 }
+
