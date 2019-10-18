@@ -1,0 +1,52 @@
+body {
+  background-color: white;
+  font-family: Geneva,Tahoma,Verdana,sans-serif; 
+}
+
+div{
+    border-radius: 15px;
+}
+
+#site-name-header{
+    background-color: blue;
+    color: white;
+   
+    border-radius: 15px;
+    font-size: 50px;
+    font-family: monaco,Consolas,Lucida Console,monospace;
+}
+
+#beach-name{
+    background-color: lightblue;
+    padding: 2% 0;
+    color: #2B25C8;
+}
+
+#beach-dropdown{
+    background-color: lightblue;
+    color: #2B25C8;
+}
+
+#nav-tool{
+     background-color: lightblue;
+    color: #2B25C8;
+
+}
+
+#weather{
+    background-color: rgb(206, 238, 254);
+    color: black;
+    padding: 2% 0;
+    
+}
+
+
+
+
+
+h1 {
+  color: blue;
+}
+
+
+
