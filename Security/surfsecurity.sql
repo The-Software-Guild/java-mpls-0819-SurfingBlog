@@ -44,44 +44,48 @@ foreign key fk_break_beach(beachId)
 references beach(`id`)
 );
 
+-- create table comment (
+-- `id` 			int 			primary key auto_increment,
+-- userId			int             not null,
+-- `breakid`		int, 			
+-- `beachid`		int				not null,
+-- isbreakcomment 	boolean 		not null default false,
+-- comment     	varchar(1000)   not null,
 
+-- foreign key(userId) references `user`(`id`),
+-- foreign key (`breakid`) references break(`id`),
+-- foreign key (`beachid`) references beach(`id`)
+-- );
 
+create table break_comment(
+`id` int primary key auto_increment,
+userId int not null,
 
-create table comment (
-`id` 			int 			primary key auto_increment,
-userId			int             not null,
-`breakid`		int, 			
-`beachid`		int				not null,
-isbreakcomment 	boolean 		not null default false,
-comment     	varchar(1000)   not null,
+Foreign Key fk_break_comment_user(userId)
+references `user`(`id`),
 
-foreign key(userId) references `user`(`id`),
-foreign key (`breakid`) references break(`id`),
-foreign key (`beachid`) references beach(`id`)
+breakId int not null,
+
+Foreign Key fk_break_comment_break(breakId)
+references break(`id`),
+
+`comment` varchar(1000) not null
 );
 
--- create table break_comment(
--- `id` int primary key auto_increment,
--- userId int not null,
+create table beach_comment (
+`id` int primary key auto_increment,
+userId int not null,
 
--- Foreign Key fk_break_comment_user(userId)
--- references `user`(`id`),
+Foreign Key fk_beach_comment_user(userId)
+references `user`(`id`),
 
--- breakId int not null,
+beachId int not null,
 
--- Foreign Key fk_break_comment_break(breakId)
--- references break(`id`),
+Foreign Key fk_beach_comment_beach(beachId)
+references beach(`id`),
 
--- `comment` varchar(1000) not null);
-
--- create table beach_comments (
--- `id`        int             primary key auto_increment,
--- userId      int             not null,
--- beachid     int             not null,
--- comment     varchar(1000)   not null,
--- foreign key (userId) references `user`(`id`),
--- foreign key (beachId) references beach(`id`)
--- );
+comment varchar(1000) not null
+);
 
 insert into `user`(`id`,`username`,`password`,`enabled`)
     values(1,"admin", "$2a$10$Pwyf0jn0glXZ36Nvo0GBtuUdl0Y5OoXV7izp2/Mi6YGvx3YY4Zcmi", true),
@@ -118,28 +122,32 @@ values
 ('808','Break C - Break 2','303','20.725689','-158.214351'),
 ('809','Break C - Break 3','303','20.725657','-158.214225');
 
-insert into comment(id, userId, breakid, beachid, isbreakcomment, comment)
+insert into break_comment(id, userId, breakid, `comment`)
 values
-('1001','2','801','301',TRUE, 'perspiciatis unde omnis iste natus error sit volupt'),
-('1002','2',NULL,'301',FALSE, 'dolor sit amet, consectetu'),
-('1003','2','803','301',TRUE, 'commodi consequatur? Quis autem vel eum iure'),
-('1004','2','804','302',TRUE, 'tempora incidunt ut labore'),
-('1005','2','805','302',TRUE, 'Duis aute irure dolor in'),
-('1006','2','806','302',TRUE, 'exercitation ullamco laboris'),
-('1007','2','807','303',TRUE, 'minim veniam, quis nostrud'),
-('1008','2',NULL,'303',FALSE, 'aspernatur aut odit aut fugit, sed quia consequuntur'),
-('1009','2','809','303',TRUE, 'consequatur, vel illum qui'),
-('1010','2','801','301',TRUE, 'Ut enim ad minim veniam'),
-('1011','2','802','301',TRUE, 'quis nostrud exercitation ullamco laboris nisi ut aliquip'),
-('1012','2','803','301',TRUE, 'ea commodo consequat. Duis aute irure dolor in'),
-('1013','2','804','302',TRUE, 'vel illum qui'),
-('1014','2','805','302',TRUE, 'aute irure dolor in'),
-('1015','2','806','302',TRUE, 'Quis autem vel eum iure'),
-('1016','2',NULL,'303',FALSE, 'unde omnis iste natus error sit volupt'),
-('1017','2','808','303',TRUE, 'laboris nisi ut aliquip'),
-('1018','2','809','303',TRUE, 'quis nostrud exercitation ullamco laboris nisi'),
-('1019','2','801','301',TRUE, 'tempora incidunt'),
-('1020','2',NULL,'301',FALSE, 'quis nostrud ut aliquip');
+('1001','2','801','perspiciatis unde omnis iste natus error sit volupt'),
+('1002','2','802','dolor sit amet, consectetu'),
+('1003','2','803', 'commodi consequatur? Quis autem vel eum iure'),
+('1004','2','804', 'tempora incidunt ut labore'),
+('1005','2','805', 'Duis aute irure dolor in'),
+('1006','2','806', 'exercitation ullamco laboris'),
+('1007','2','807', 'minim veniam, quis nostrud'),
+('1008','2','808', 'aspernatur aut odit aut fugit, sed quia consequuntur'),
+('1009','2','809', 'consequatur, vel illum qui'),
+('1010','2','801', 'Ut enim ad minim veniam'),
+('1011','2','802', 'quis nostrud exercitation ullamco laboris nisi ut aliquip');
+
+
+insert into beach_comment(id, userId, beachId, `comment`)
+values
+('1012','2','301', 'ea commodo consequat. Duis aute irure dolor in'),
+('1013','2','302', 'vel illum qui'),
+('1014','2','302','aute irure dolor in'),
+('1015','2','302','Quis autem vel eum iure'),
+('1016','2','303','unde omnis iste natus error sit volupt'),
+('1017','2','303','laboris nisi ut aliquip'),
+('1018','2','303','quis nostrud exercitation ullamco laboris nisi'),
+('1019','2','301','tempora incidunt'),
+('1020','2','301','quis nostrud ut aliquip');
 
 
 
