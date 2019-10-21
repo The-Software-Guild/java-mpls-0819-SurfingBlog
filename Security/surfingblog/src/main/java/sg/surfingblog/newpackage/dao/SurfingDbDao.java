@@ -44,7 +44,13 @@ public class SurfingDbDao implements SurfingDao {
     private UserDao userDao;
 
     @Override
-    public List<Break> getBreaksByBeach(int id) {
+    public List<Break> getBreaksByBeach(int id) throws InvalidIdException {
+
+        try {
+            Beach toCheck = getBeachById(id);
+        } catch (InvalidIdException ex) {
+            throw new InvalidIdException("Beach not found", ex);
+        }
 
         String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, be.id beachid, be.`name` beachname, be.zipcode\n"
                 + "From break br\n"
@@ -57,7 +63,13 @@ public class SurfingDbDao implements SurfingDao {
     }
 
     @Override
-    public List<BeachComment> getCommentsByBeach(int id) {
+    public List<BeachComment> getCommentsByBeach(int id) throws InvalidIdException {
+
+        try {
+            Beach toCheck = getBeachById(id);
+        } catch (InvalidIdException ex) {
+            throw new InvalidIdException("Beach not found", ex);
+        }
 
         String query = "Select bc.id commentid, bc.userid, bc.beachid, bc.`comment`, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From beach_comment bc\n"
@@ -71,7 +83,13 @@ public class SurfingDbDao implements SurfingDao {
     }
 
     @Override
-    public List<BreakComment> getCommentsByBreak(int id) {
+    public List<BreakComment> getCommentsByBreak(int id) throws InvalidIdException {
+
+        try {
+            Break breakToCheck = getBreakById(id);
+        } catch (InvalidIdException ex) {
+            throw new InvalidIdException("BeachId, UserId, or BreakId not found", ex);
+        }
 
         String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From break_comment brc\n"
@@ -100,11 +118,23 @@ public class SurfingDbDao implements SurfingDao {
     }
 
     @Override
+    public List<News> getAllNews() {
+
+        String query = "Select * \n"
+                + "From home_news_link ";
+
+        List<News> toReturn = template.query(query, new NewsMapper());
+
+        return toReturn;
+
+    }
+
+    @Override
     public News getNewsById(int id) throws InvalidIdException {
 
         String query = "Select * \n"
                 + "From home_news_link \n"
-                + "Where id = 1";
+                + "Where id = ?";
 
         News toReturn = null;
         try {
@@ -168,7 +198,7 @@ public class SurfingDbDao implements SurfingDao {
                 + "isactive = ?\n"
                 + "Where id = ?";
 
-        int rowsAffected = template.update(updateStatement, updatedNews.getNewsURL(), updatedNews.getNewsAbbrText(), updatedNews.getNewsURL(), updatedNews.getIsActive(), updatedNews.getId());
+        int rowsAffected = template.update(updateStatement, updatedNews.getNewsURL(), updatedNews.getNewsAbbrText(), updatedNews.getPicURL(), updatedNews.getIsActive(), updatedNews.getId());
 
         if (rowsAffected == 0) {
             throw new InvalidIdException("Could not edit News with id = " + updatedNews.getId());
@@ -319,9 +349,8 @@ public class SurfingDbDao implements SurfingDao {
         template.update(deleteBreaks, id);
 
         template.update(deleteBeaches, id);
-        
+
         //need to verify deletions in MySQL again. Deleting 3, 2, 1 works. But 1, 2, 3 does not. 
-        
     }
 
     @Override
@@ -696,8 +725,6 @@ public class SurfingDbDao implements SurfingDao {
         if (rowsAffected > 1) {
             throw new SurfingDaoException("ERROR: Break Comment Id IS NOT UNIQUE FOR Break Comment TABLE.");
         }
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -716,6 +743,37 @@ public class SurfingDbDao implements SurfingDao {
         template.update(deleteStatement, id);
     }
 
+    @Override
+    public void deleteAllTables() {
+
+        String deleteNews = "Delete \n"
+                + "From home_news_link \n"
+                + "Where id > 0";
+
+        String deleteBeachComments = "Delete \n"
+                + "From beach_comment \n"
+                + "Where id > 0";
+
+        String deleteBreakComments = "Delete \n"
+                + "From break_comment \n"
+                + "Where id > 0";
+
+        String deleteBreaks = "Delete \n"
+                + "From break \n"
+                + "Where id > 0";
+
+        String deleteBeaches = "Delete \n"
+                + "From beach \n"
+                + "Where id > 0";
+
+        template.update(deleteNews);
+        template.update(deleteBeachComments);
+        template.update(deleteBreakComments);
+        template.update(deleteBreaks);
+        template.update(deleteBeaches);
+
+    }
+
     private class NewsMapper implements RowMapper<News> {
 
         @Override
@@ -723,7 +781,7 @@ public class SurfingDbDao implements SurfingDao {
             News toReturn = new News();
             toReturn.setId(results.getInt("Id"));
             toReturn.setNewsURL(results.getString("News_url"));
-            toReturn.setNewsAbbrText(results.getString("New_link_text"));
+            toReturn.setNewsAbbrText(results.getString("News_link_text"));
             toReturn.setPicURL(results.getString("Picture_url"));
             toReturn.setIsActive(results.getBoolean("IsActive"));
 
