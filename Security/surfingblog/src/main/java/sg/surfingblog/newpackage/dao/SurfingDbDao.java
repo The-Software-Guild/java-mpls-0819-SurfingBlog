@@ -707,8 +707,6 @@ public class SurfingDbDao implements SurfingDao {
         if (rowsAffected > 1) {
             throw new SurfingDaoException("ERROR: Break Comment Id IS NOT UNIQUE FOR Break Comment TABLE.");
         }
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
