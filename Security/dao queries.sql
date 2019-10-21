@@ -26,6 +26,9 @@ Select *
 From home_news_link 
 Where id = 1;
 
+Select * 
+From home_news_link 
+
 Insert into home_news_link(news_url, news_link_text, picture_url, isactive)
 Values
 ('test1', 'test2', 'test3', true);

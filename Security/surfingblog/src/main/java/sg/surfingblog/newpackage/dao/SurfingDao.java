@@ -18,11 +18,11 @@ import sg.surfingblog.newpackage.models.News;
  */
 public interface SurfingDao {
     
-    List<Break> getBreaksByBeach(int id);
+    List<Break> getBreaksByBeach(int id) throws InvalidIdException;
     
-    List<BeachComment> getCommentsByBeach(int id);
+    List<BeachComment> getCommentsByBeach(int id) throws InvalidIdException;
     
-    List<BreakComment> getCommentsByBreak(int id);
+    List<BreakComment> getCommentsByBreak(int id) throws InvalidIdException;
 
     List<News> getAllActiveNews();
     

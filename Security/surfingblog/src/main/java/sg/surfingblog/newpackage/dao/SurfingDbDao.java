@@ -44,7 +44,13 @@ public class SurfingDbDao implements SurfingDao {
     private UserDao userDao;
 
     @Override
-    public List<Break> getBreaksByBeach(int id) {
+    public List<Break> getBreaksByBeach(int id) throws InvalidIdException {
+
+        try {
+            Beach toCheck = getBeachById(id);
+        } catch (InvalidIdException ex) {
+            throw new InvalidIdException("Beach not found", ex);
+        }
 
         String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, be.id beachid, be.`name` beachname, be.zipcode\n"
                 + "From break br\n"
@@ -57,7 +63,13 @@ public class SurfingDbDao implements SurfingDao {
     }
 
     @Override
-    public List<BeachComment> getCommentsByBeach(int id) {
+    public List<BeachComment> getCommentsByBeach(int id) throws InvalidIdException {
+
+        try {
+            Beach toCheck = getBeachById(id);
+        } catch (InvalidIdException ex) {
+            throw new InvalidIdException("Beach not found", ex);
+        }
 
         String query = "Select bc.id commentid, bc.userid, bc.beachid, bc.`comment`, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From beach_comment bc\n"
@@ -71,7 +83,13 @@ public class SurfingDbDao implements SurfingDao {
     }
 
     @Override
-    public List<BreakComment> getCommentsByBreak(int id) {
+    public List<BreakComment> getCommentsByBreak(int id) throws InvalidIdException {
+
+        try {
+            Break breakToCheck = getBreakById(id);
+        } catch (InvalidIdException ex) {
+            throw new InvalidIdException("BeachId, UserId, or BreakId not found", ex);
+        }
 
         String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From break_comment brc\n"
