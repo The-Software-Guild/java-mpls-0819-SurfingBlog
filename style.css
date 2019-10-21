@@ -3,7 +3,9 @@
     padding: 0px;
     box-sizing: border-box;
 }
-
+body{
+    background-color: rgb(32, 71, 145);  
+}
 nav{
     display: flex;
     justify-content: space-around;
@@ -11,9 +13,17 @@ nav{
     min-height: 8vh;
     font-family: 'Poppins', sans-serif;
     background-color: cornflowerblue;
+    z-index: auto;
+
 }
+.carousel{
+    margin-top: 50px;
+    position: absolute;
+    z-index: -1;
+}
+
 .logo{
-    color: ghostwhite;
+    color: rgb(240, 240, 240);
     letter-spacing: 4px;
     font-size: 20px;
 }
