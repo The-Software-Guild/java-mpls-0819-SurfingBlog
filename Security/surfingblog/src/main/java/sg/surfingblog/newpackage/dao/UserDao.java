@@ -30,4 +30,6 @@ public interface UserDao {
     void updateRole(Role role);
     Role createRole(Role role);
     
+    void deleteAllTables();
+    
 }

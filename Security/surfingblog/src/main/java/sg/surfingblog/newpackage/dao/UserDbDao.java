@@ -30,7 +30,7 @@ public class UserDbDao implements UserDao {
     JdbcTemplate jdbc;
 
     @Override
-    public SiteUser getUserById(int id) throws InvalidIdException  {
+    public SiteUser getUserById(int id) throws InvalidIdException {
 
         String select = "SELECT id, username, password, enabled FROM user WHERE id = ?";
 
@@ -224,6 +224,22 @@ public class UserDbDao implements UserDao {
         role.setId(newId);
 
         return role;
+
+    }
+
+    @Override
+    public void deleteAllTables() {
+
+        String deleteRelationships = "Delete \n"
+                + "From user_role \n"
+                + "Where user_id > 0";
+
+        String deleteUsers = "Delete \n"
+                + "From User \n"
+                + "Where id > 0";
+
+        jdbc.update(deleteRelationships);
+        jdbc.update(deleteUsers);
 
     }
 

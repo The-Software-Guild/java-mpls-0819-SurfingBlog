@@ -100,11 +100,23 @@ public class SurfingDbDao implements SurfingDao {
     }
 
     @Override
+    public List<News> getAllNews() {
+
+        String query = "Select * \n"
+                + "From home_news_link ";
+
+        List<News> toReturn = template.query(query, new NewsMapper());
+
+        return toReturn;
+
+    }
+
+    @Override
     public News getNewsById(int id) throws InvalidIdException {
 
         String query = "Select * \n"
                 + "From home_news_link \n"
-                + "Where id = 1";
+                + "Where id = ?";
 
         News toReturn = null;
         try {
@@ -168,7 +180,7 @@ public class SurfingDbDao implements SurfingDao {
                 + "isactive = ?\n"
                 + "Where id = ?";
 
-        int rowsAffected = template.update(updateStatement, updatedNews.getNewsURL(), updatedNews.getNewsAbbrText(), updatedNews.getNewsURL(), updatedNews.getIsActive(), updatedNews.getId());
+        int rowsAffected = template.update(updateStatement, updatedNews.getNewsURL(), updatedNews.getNewsAbbrText(), updatedNews.getPicURL(), updatedNews.getIsActive(), updatedNews.getId());
 
         if (rowsAffected == 0) {
             throw new InvalidIdException("Could not edit News with id = " + updatedNews.getId());
@@ -319,9 +331,8 @@ public class SurfingDbDao implements SurfingDao {
         template.update(deleteBreaks, id);
 
         template.update(deleteBeaches, id);
-        
+
         //need to verify deletions in MySQL again. Deleting 3, 2, 1 works. But 1, 2, 3 does not. 
-        
     }
 
     @Override
@@ -716,6 +727,37 @@ public class SurfingDbDao implements SurfingDao {
         template.update(deleteStatement, id);
     }
 
+    @Override
+    public void deleteAllTables() {
+
+        String deleteNews = "Delete \n"
+                + "From home_news_link \n"
+                + "Where id > 0";
+
+        String deleteBeachComments = "Delete \n"
+                + "From beach_comment \n"
+                + "Where id > 0";
+
+        String deleteBreakComments = "Delete \n"
+                + "From break_comment \n"
+                + "Where id > 0";
+
+        String deleteBreaks = "Delete \n"
+                + "From break \n"
+                + "Where id > 0";
+
+        String deleteBeaches = "Delete \n"
+                + "From beach \n"
+                + "Where id > 0";
+
+        template.update(deleteNews);
+        template.update(deleteBeachComments);
+        template.update(deleteBreakComments);
+        template.update(deleteBreaks);
+        template.update(deleteBeaches);
+
+    }
+
     private class NewsMapper implements RowMapper<News> {
 
         @Override
@@ -723,7 +765,7 @@ public class SurfingDbDao implements SurfingDao {
             News toReturn = new News();
             toReturn.setId(results.getInt("Id"));
             toReturn.setNewsURL(results.getString("News_url"));
-            toReturn.setNewsAbbrText(results.getString("New_link_text"));
+            toReturn.setNewsAbbrText(results.getString("News_link_text"));
             toReturn.setPicURL(results.getString("Picture_url"));
             toReturn.setIsActive(results.getBoolean("IsActive"));
 
