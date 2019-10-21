@@ -25,6 +25,8 @@ public interface SurfingDao {
     List<BreakComment> getCommentsByBreak(int id);
 
     List<News> getAllActiveNews();
+    
+    List<News> getAllNews();
 
     News getNewsById(int id) throws InvalidIdException;
 
@@ -73,6 +75,8 @@ public interface SurfingDao {
     void updateBreakComment(BreakComment updatedBreakComment) throws SurfingDaoException, InvalidIdException ;
 
     void deleteBreakComment(int id) throws InvalidIdException;
+    
+    void deleteAllTables();
 
 }
 

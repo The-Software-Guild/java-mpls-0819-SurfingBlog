@@ -140,3 +140,32 @@ Where beachid = 303;
 Delete 
 From beach 
 Where id = 303;
+
+Delete 
+From home_news_link 
+Where id > 0;
+
+Delete 
+From 
+beach_comment 
+Where id > 0;
+
+Delete 
+From break_comment 
+Where id > 0;
+
+Delete 
+From break 
+Where id > 0;
+
+Delete 
+From beach 
+Where id > 0;
+
+Delete 
+From user_role 
+Where user_id > 0;
+
+Delete 
+From User 
+Where id > 0;
