@@ -48,11 +48,11 @@ public class BeachController {
         List<Beach> allBeaches = sDao.getAllBeaches();
         model.addAttribute("allBeaches", allBeaches);
         
-        int selectedBeachId = Integer.parseInt(request.getParameter("id"));
-        Beach selectedBeach = sDao.getBeachById(selectedBeachId);
+//        int selectedBeachId = Integer.parseInt(request.getParameter("id"));
+        Beach selectedBeach = sDao.getBeachById(301);
         model.addAttribute("selectedBeach", selectedBeach);
  
-        List<Break> allBreaksForBeach = sDao.getBreaksByBeach(selectedBeachId);
+        List<Break> allBreaksForBeach = sDao.getBreaksByBeach(301);
         model.addAttribute("allBreaksForBeach", allBreaksForBeach);
         
         return "beach";

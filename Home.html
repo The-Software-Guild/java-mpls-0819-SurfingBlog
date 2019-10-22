@@ -9,45 +9,59 @@
     <link rel="stylesheet" href="style.css">
     <title>SurfSpot</title>
     <nav>
-            <div class="logo">
-                <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
+        <div class="logo">
+            <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
+        </div>
+        <ul class="navLinks">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#">Beaches</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+            
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    <login>
+        <form id="upperLog">
+            <label for="username"> Username: </label>
+            <input type="text" id="username" name="username">
+            <label for="password"> Password: </label>
+            <input type="password" id="password" name="password">
+            <div id="lowerLog">
+                <input type="checkbox"><label for="checkbox">Keep me logged in</label>
+                <input type="submit" value="Login">
             </div>
-            <ul class="navLinks">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">About Us</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        </form>
+    </login>
+
 </head>
 
 <body>
-  
+
     <div id="carouselitem" class="carousel slide col-md-8" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselitem" data-slide-to="0" class="active"></li>
             <li data-target="#carouselitem" data-slide-to="1"></li>
             <li data-target="#carouselitem" data-slide-to="2"></li>
         </ol>
-        <ul class="carousel-inner" >
+        <ul class="carousel-inner" width="50%" height="300px">
             <li class="carousel-item active">
-                <img class="d-block" src="Images/sky-2603741_1280.jpg" alt="First" height="500"/>
+                <img class="d-block" src="Images/sky-2603741_1280.jpg" alt="First"/>
             </li>
             <li class="carousel-item">
-                <img class="d-block" src="Images/sunset-1777313_1280-2.jpg" alt="Second" height="500"/>
+                <img class="d-block" src="Images/sunset-1777313_1280-2.jpg" alt="Second"/>
             </li>
             <li class="carousel-item">
-                <img class="d-block" src="Images/waterfall-969228_1280.jpg" alt="Third" height="500"/>
+                <img class="d-block" src="Images/waterfall-969228_1280.jpg" alt="Third"/>
             </li>
         </ul>
         <a class="carousel-control-prev" href="#carouselitem" role="button" data-slide="prev">
