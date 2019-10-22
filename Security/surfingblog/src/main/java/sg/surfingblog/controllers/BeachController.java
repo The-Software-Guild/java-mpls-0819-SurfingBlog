@@ -59,16 +59,13 @@ public class BeachController {
    @PostMapping("addBeachComment")
    public String addBeachComment(BeachComment newBeachComment, HttpServletRequest request) throws SurfingDaoException, InvalidIdException {
        
-       BeachComment newBeachComment2 = new BeachComment();
-       
        Beach testBeach = sDao.getBeachById(301);
        SiteUser testUser = uDao.getUserById(1);
        
-       newBeachComment2.setBeach(testBeach);
-       newBeachComment2.setUser(testUser);
-       newBeachComment2.setCommentText("This is a test comment");
+       newBeachComment.setBeach(testBeach);
+       newBeachComment.setUser(testUser);
        
-       sDao.addBeachComment(newBeachComment2);
+       sDao.addBeachComment(newBeachComment);
        
        return "redirect:/beach";
        
