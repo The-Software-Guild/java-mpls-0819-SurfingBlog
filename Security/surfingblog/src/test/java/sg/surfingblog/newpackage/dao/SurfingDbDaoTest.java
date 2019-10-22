@@ -929,9 +929,9 @@ public class SurfingDbDaoTest {
         try {
             Beach beach1 = null;
             Beach addedBeach = toTest.addBeach(beach1);
-            
+
             fail();
-            
+
         } catch (SurfingDaoException ex) {
         }
     }
@@ -964,7 +964,7 @@ public class SurfingDbDaoTest {
             fail();
         }
     }
-    
+
     @Test
     public void testUpdateNullBeach() {
 
@@ -984,8 +984,8 @@ public class SurfingDbDaoTest {
         } catch (SurfingDaoException ex) {
         }
     }
-    
-     @Test
+
+    @Test
     public void testUpdateBeachInvalidId() {
 
         try {
@@ -1050,7 +1050,7 @@ public class SurfingDbDaoTest {
             fail();
         }
     }
-    
+
     @Test
     public void testDeleteBeachInvalidId() {
 
@@ -1073,7 +1073,7 @@ public class SurfingDbDaoTest {
             toTest.deleteBeach(3382);
 
             fail();
-            
+
         } catch (SurfingDaoException ex) {
             fail();
         } catch (InvalidIdException ex) {
@@ -1180,7 +1180,39 @@ public class SurfingDbDaoTest {
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
         }
+    }
 
+    @Test
+    public void testGetBreakByInvalidId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(addedBeach);
+            break2.setLatitude(new BigDecimal("20.716185"));
+            break2.setLongitude(new BigDecimal("-158.214684"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            Break toCheck = toTest.getBreakById(5331);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
     }
 
     /**
@@ -1189,6 +1221,69 @@ public class SurfingDbDaoTest {
     @Test
     public void testAddBreakGoldenPath() {
         //tested above
+    }
+
+    @Test
+    public void testAddNullBreak() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = null;
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBreakNullBeach() {
+
+        try {
+            Beach beach1 = null;
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(beach1);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBreakInvalidBeachId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setId(7334);
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(beach1);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+            fail();
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
     }
 
     /**
@@ -1227,6 +1322,104 @@ public class SurfingDbDaoTest {
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
+        }
+    }
+
+    @Test
+    public void testUpdateNullBreak() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break updatedBreak = null;
+            toTest.updateBreak(updatedBreak);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakNullBeach() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Beach nullBeach = null;
+
+            Break updatedBreak = new Break();
+            updatedBreak.setId(addedBreak1.getId());
+            updatedBreak.setName("Break Break");
+            updatedBreak.setBeach(nullBeach);
+            updatedBreak.setLatitude(new BigDecimal("20.735678"));
+            updatedBreak.setLongitude(new BigDecimal("-158.214583"));
+            toTest.updateBreak(updatedBreak);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakInvalidBeachId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Beach invalidBeach = new Beach();
+            invalidBeach.setId(3372);
+            invalidBeach.setName("fake beach");
+            invalidBeach.setZipCode(51522);
+
+            Break updatedBreak = new Break();
+            updatedBreak.setId(addedBreak1.getId());
+            updatedBreak.setName("Break Break");
+            updatedBreak.setBeach(invalidBeach);
+            updatedBreak.setLatitude(new BigDecimal("20.735678"));
+            updatedBreak.setLongitude(new BigDecimal("-158.214583"));
+            toTest.updateBreak(updatedBreak);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
         }
     }
 
@@ -1285,6 +1478,46 @@ public class SurfingDbDaoTest {
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
+        }
+    }
+
+    @Test
+    public void testDeleteBreakInvalidId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(addedBeach);
+            break2.setLatitude(new BigDecimal("20.716185"));
+            break2.setLongitude(new BigDecimal("-158.214684"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            Break break3 = new Break();
+            break3.setName("Break C");
+            break3.setBeach(addedBeach);
+            break3.setLatitude(new BigDecimal("20.716634"));
+            break3.setLongitude(new BigDecimal("-158.214965"));
+            Break addedBreak3 = toTest.addBreak(break3);
+
+            toTest.deleteBreak(2988);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
         }
     }
 
@@ -1390,12 +1623,171 @@ public class SurfingDbDaoTest {
         }
     }
 
+    @Test
+    public void testGetBeachCommentByInvalidId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+            Beach addedBeach2 = toTest.addBeach(beach2);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            BeachComment bc2 = new BeachComment();
+            bc2.setUser(userDao.getUserById(2));
+            bc2.setBeach(addedBeach);
+            bc2.setCommentText("vel illum qui");
+            BeachComment secondBC = toTest.addBeachComment(bc2);
+
+            BeachComment bc3 = new BeachComment();
+            bc3.setUser(userDao.getUserById(2));
+            bc3.setBeach(addedBeach2);
+            bc3.setCommentText("aute irure dolor in");
+            BeachComment thirdBC = toTest.addBeachComment(bc3);
+
+            BeachComment toCheck = toTest.getBeachCommentById(2339);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+    }
+
     /**
      * Test of addBeachComment method, of class SurfingDbDao.
      */
     @Test
     public void testAddBeachCommentGoldenPath() {
         //tested above
+    }
+
+    @Test
+    public void testAddNullBeachComment() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            BeachComment bc1 = null;
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBeachCommentNullBeach() {
+
+        try {
+            Beach beach1 = null;
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(beach1);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBeachCommentNullUser() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+            Beach addedBeach2 = toTest.addBeach(beach2);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(null);
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBeachCommentInvalidBeachId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setId(4429);
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(beach1);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBeachCommentInvalidUserId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            SiteUser invalidUser = new SiteUser();
+            invalidUser.setId(5);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(invalidUser);
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
     }
 
     /**
@@ -1436,6 +1828,178 @@ public class SurfingDbDaoTest {
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
+        }
+    }
+
+    @Test
+    public void testUpdateNullBeachComment() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+            Beach addedBeach2 = toTest.addBeach(beach2);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            BeachComment updatedBC = null;
+            toTest.updateBeachComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBeachCommentNullBeach() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = null;
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            BeachComment updatedBC = new BeachComment();
+            updatedBC.setId(firstBC.getId());
+            updatedBC.setUser(userDao.getUserById(2));
+            updatedBC.setBeach(beach2);
+            updatedBC.setCommentText("tempora incidunt");
+            toTest.updateBeachComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBeachCommentNullUser() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+            Beach addedBeach2 = toTest.addBeach(beach2);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            BeachComment updatedBC = new BeachComment();
+            updatedBC.setId(firstBC.getId());
+            updatedBC.setUser(null);
+            updatedBC.setBeach(addedBeach2);
+            updatedBC.setCommentText("tempora incidunt");
+            toTest.updateBeachComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBeachCommentInvalidBeachId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setId(8336);
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            BeachComment updatedBC = new BeachComment();
+            updatedBC.setId(firstBC.getId());
+            updatedBC.setUser(userDao.getUserById(2));
+            updatedBC.setBeach(beach2);
+            updatedBC.setCommentText("tempora incidunt");
+            toTest.updateBeachComment(updatedBC);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+
+    }
+
+    @Test
+    public void testUpdateBeachCommentInvalidUserId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+            Beach addedBeach2 = toTest.addBeach(beach2);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            SiteUser invalidUser = new SiteUser();
+            invalidUser.setId(7);
+
+            BeachComment updatedBC = new BeachComment();
+            updatedBC.setId(firstBC.getId());
+            updatedBC.setUser(invalidUser);
+            updatedBC.setBeach(addedBeach2);
+            updatedBC.setCommentText("tempora incidunt");
+            toTest.updateBeachComment(updatedBC);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
         }
     }
 
@@ -1482,6 +2046,36 @@ public class SurfingDbDaoTest {
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             Logger.getLogger(SurfingDbDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test
+    public void testDeleteInvalidIdBeachComment() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach beach2 = new Beach();
+            beach2.setName("Beach B");
+            beach2.setZipCode(98420);
+            Beach addedBeach2 = toTest.addBeach(beach2);
+
+            BeachComment bc1 = new BeachComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeach(addedBeach);
+            bc1.setCommentText("ea commodo consequat. Duis aute irure dolor in");
+            BeachComment firstBC = toTest.addBeachComment(bc1);
+
+            toTest.deleteBeachComment(5421);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
         }
     }
 
@@ -1617,12 +2211,249 @@ public class SurfingDbDaoTest {
         }
     }
 
+    @Test
+    public void testGetBreakCommentByInvalidId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment toCheck = toTest.getBreakCommentById(8832);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+    }
+
     /**
      * Test of addBreakComment method, of class SurfingDbDao.
      */
     @Test
     public void testAddBreakCommentGoldenPath() {
         //testd above
+    }
+
+    @Test
+    public void testAddNullBreakComment() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            BreakComment bc1 = null;
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBreakCommentNullBreak() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = null;
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(break1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBreakCommentNullUser() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(null);
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBreakCommentNullBeach() {
+
+        try {
+            Beach beach1 = null;
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(beach1);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testAddBreakCommentInvalidBreakId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setId(9822);
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(break1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+
+    }
+
+    @Test
+    public void testAddBreakCommentInvalidUserId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            SiteUser invalidUser = new SiteUser();
+            invalidUser.setId(8);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(invalidUser);
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+
+    }
+
+    @Test
+    public void testAddBreakCommentInvalidBeachId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setId(9336);
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(beach1);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+
     }
 
     /**
@@ -1672,6 +2503,314 @@ public class SurfingDbDaoTest {
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             Logger.getLogger(SurfingDbDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test
+    public void testUpdateNullBreakComment() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(addedBeach);
+            break2.setLatitude(new BigDecimal("20.725689"));
+            break2.setLongitude(new BigDecimal("-158.214351"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment updatedBC = null;
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakCommentNullBreak() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = null;
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment updatedBC = new BreakComment();
+            updatedBC.setId(addedBC1.getId());
+            updatedBC.setUser(userDao.getUserById(2));
+            updatedBC.setBeachBreak(break2);
+            updatedBC.setCommentText("aspernatur aut odit aut fugit, sed quia consequuntur");
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakCommentNullUser() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(addedBeach);
+            break2.setLatitude(new BigDecimal("20.725689"));
+            break2.setLongitude(new BigDecimal("-158.214351"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment updatedBC = new BreakComment();
+            updatedBC.setId(addedBC1.getId());
+            updatedBC.setUser(null);
+            updatedBC.setBeachBreak(addedBreak2);
+            updatedBC.setCommentText("aspernatur aut odit aut fugit, sed quia consequuntur");
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakCommentNullBeach() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Beach beach2 = null;
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(beach2);
+            break2.setLatitude(new BigDecimal("20.725689"));
+            break2.setLongitude(new BigDecimal("-158.214351"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment updatedBC = new BreakComment();
+            updatedBC.setId(addedBC1.getId());
+            updatedBC.setUser(userDao.getUserById(2));
+            updatedBC.setBeachBreak(addedBreak2);
+            updatedBC.setCommentText("aspernatur aut odit aut fugit, sed quia consequuntur");
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (InvalidIdException ex) {
+            fail();
+        } catch (SurfingDaoException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakCommentInvalidBreakId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setId(7629);
+            break2.setName("Break B");
+            break2.setBeach(addedBeach);
+            break2.setLatitude(new BigDecimal("20.725689"));
+            break2.setLongitude(new BigDecimal("-158.214351"));
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment updatedBC = new BreakComment();
+            updatedBC.setId(addedBC1.getId());
+            updatedBC.setUser(userDao.getUserById(2));
+            updatedBC.setBeachBreak(break2);
+            updatedBC.setCommentText("aspernatur aut odit aut fugit, sed quia consequuntur");
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+
+    }
+
+    @Test
+    public void testUpdateBreakCommentInvalidUserId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(addedBeach);
+            break2.setLatitude(new BigDecimal("20.725689"));
+            break2.setLongitude(new BigDecimal("-158.214351"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            SiteUser invalidUser = new SiteUser();
+            invalidUser.setId(7);
+
+            BreakComment updatedBC = new BreakComment();
+            updatedBC.setId(addedBC1.getId());
+            updatedBC.setUser(invalidUser);
+            updatedBC.setBeachBreak(addedBreak2);
+            updatedBC.setCommentText("aspernatur aut odit aut fugit, sed quia consequuntur");
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
+        }
+    }
+
+    @Test
+    public void testUpdateBreakCommentInvalidBeachId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+
+            Beach invalidBeach = new Beach();
+            invalidBeach.setId(7289);
+
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+
+            Break break2 = new Break();
+            break2.setName("Break B");
+            break2.setBeach(invalidBeach);
+            break2.setLatitude(new BigDecimal("20.725689"));
+            break2.setLongitude(new BigDecimal("-158.214351"));
+            Break addedBreak2 = toTest.addBreak(break2);
+
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+
+            BreakComment updatedBC = new BreakComment();
+            updatedBC.setId(addedBC1.getId());
+            updatedBC.setUser(userDao.getUserById(2));
+            updatedBC.setBeachBreak(addedBreak2);
+            updatedBC.setCommentText("aspernatur aut odit aut fugit, sed quia consequuntur");
+            toTest.updateBreakComment(updatedBC);
+
+            fail();
+
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
         }
     }
 
@@ -1732,6 +2871,50 @@ public class SurfingDbDaoTest {
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             Logger.getLogger(SurfingDbDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test
+    public void testDeleteBreakCommentInvalidId() {
+
+        try {
+            Beach beach1 = new Beach();
+            beach1.setName("Beach A");
+            beach1.setZipCode(96701);
+            Beach addedBeach = toTest.addBeach(beach1);
+            
+            Break break1 = new Break();
+            break1.setName("Break A");
+            break1.setBeach(addedBeach);
+            break1.setLatitude(new BigDecimal("20.716179"));
+            break1.setLongitude(new BigDecimal("-158.214676"));
+            Break addedBreak1 = toTest.addBreak(break1);
+            
+            BreakComment bc1 = new BreakComment();
+            bc1.setUser(userDao.getUserById(2));
+            bc1.setBeachBreak(addedBreak1);
+            bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
+            BreakComment addedBC1 = toTest.addBreakComment(bc1);
+            
+            BreakComment bc2 = new BreakComment();
+            bc2.setUser(userDao.getUserById(2));
+            bc2.setBeachBreak(addedBreak1);
+            bc2.setCommentText("dolor sit amet, consectetu");
+            BreakComment addedBC2 = toTest.addBreakComment(bc2);
+            
+            BreakComment bc3 = new BreakComment();
+            bc3.setUser(userDao.getUserById(2));
+            bc3.setBeachBreak(addedBreak1);
+            bc3.setCommentText("commodi consequatur? Quis autem vel eum iure");
+            BreakComment addedBC3 = toTest.addBreakComment(bc3);
+            
+            toTest.deleteBreakComment(4529);
+            
+            fail();
+            
+        } catch (SurfingDaoException ex) {
+            fail();
+        } catch (InvalidIdException ex) {
         }
     }
 
