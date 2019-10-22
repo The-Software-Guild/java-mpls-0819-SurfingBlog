@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="Beach.css">
+        
         <title>SurfSpot</title>
     </head>
     <body onload="loadWeather(); loadBreaks(); loadBeachComments();">
@@ -17,6 +18,8 @@
                 <div class ="col-md-10 text-center border border-light" id ="site-name-header">THE SURF SPOT</div>
                 <div class ="col-md-1"></div>
                 <div class ="col-md-1 text-center border border-light" id = "nav-tool"><h3>Nav Tool</h3></div>
+                Username:&nbsp;<span th:text="${#authentication.getPrincipal().getUsername()}" id = "username"></span>
+                
             </div>
 
             <br>
@@ -80,9 +83,9 @@
                             <form action="addBeachComment" method="POST">
                                 
                                 <div class="form-group row">
-                                    <label for="beachComment" class="col-3 col-form-label">
+                                    <label for="commentText" class="col-3 col-form-label">
                                         Comment</label>
-                                    <textarea class ="form-control" name ="beachComment" id="beachComment" rows="3">
+                                    <textarea class ="form-control" name ="commentText" id="commentText" rows="3">
 
                                     </textarea>
                                 </div>
@@ -93,7 +96,7 @@
                     </div>
 
 
-
+                    
 
 
                 </div>
@@ -101,22 +104,6 @@
             </div>
 
             <br>
-
-            <div class="col-md-6">
-                <button type="button" id="test-button" class="btn btn-default">
-                    Button 1
-                </button>
-            </div>
-
-            <br>
-
-            <div class="col-md-6">
-                <button type="button" id="test-button-2" class="btn btn-default">
-                    Button 2
-                </button>
-            </div>
-
-
 
             <script
                 src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -128,6 +115,8 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
                     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+            
+            <!--<script type="text/javascript" src="Beach.js"></script>-->
 
             <script th:inline="javascript">
 
@@ -165,18 +154,6 @@
 
                 });
 
-            </script>
-
-            <script th:inline="javascript">
-
-                $('#test-button-2').click(function (event) {
-
-
-
-                $('#weather').append("<p> This has been created </p>");
-                $('#weather').append("<p> This has been appended </p>");
-
-                });
             </script>
 
             <script th:inline="javascript">
@@ -222,6 +199,8 @@
 
                 alert($(this).find('option:selected').val());
                 alert($('#beach-dropdown').find('option:selected').val());
+                
+                
 
 
                 })
