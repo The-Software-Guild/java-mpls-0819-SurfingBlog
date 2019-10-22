@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="Beach.css">
         <title>SurfSpot</title>
     </head>
-    <body onload="testFunction()">
+    <body onload="loadWeather(); loadBreaks();">
 
         <div class ="container">
 
@@ -22,9 +22,32 @@
             <br>
 
             <div class = "row">
-                <div class ="col-md-3 text-center border border-light" id="beach-dropdown"><h3>Beach Dropdown</h3></div>
+
+                <div class ="col-md-3 text-center border border-light" id="beach-dropdown">
+                    <div class="col-9">
+                        <select id="beach" name="beachId" class="form-control" >
+                            <a class="dropdown-item" href="#">
+                                <option th:each="beach : ${allBeaches}" 
+                                        th:value="${beach.id}" 
+                                        th:text="${beach.name}"></a>
+                            </option>
+                        </select>
+                    </div>
+
+                    <p><a href="#" th:href="@{/beach(id=303)}">Go!</a></p>
+
+
+                </div>
+
+
+
                 <div class ="col-md-1"></div>
-                <div class ="col-md-8 text-center border border-light" id="beach-name"><h3>Beach Name</h3></div>
+                <div class ="col-md-8 text-center border border-light" id="beach-name">
+
+                    <h3 th:text="${selectedBeach.name}"/>
+
+                </div>
+
             </div>
 
             <br>
@@ -39,12 +62,8 @@
 
             <br>
 
-            <div class ="row">
-                <div class ="col-md-3 text-center border border-light"><h1>Break Pic/Link 1</h1></div>
-                <div class ="col-md-1"></div>
-                <div class ="col-md-3 text-center border border-light"><h1>Break Pic/Link 2</h1></div>
-                <div class ="col-md-1"></div>
-                <div class ="col-md-3 text-center border border-light"><h1>Break Pic/Link 3</h1></div>
+            <div class ="row" id = "breaks">
+                
             </div>
 
             <br>
@@ -70,6 +89,8 @@
                     Button 2
                 </button>
             </div>
+
+
 
             <script
                 src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -134,8 +155,8 @@
 
             <script th:inline="javascript">
 
-                function testFunction(){
-                      $.ajax ({
+                function loadWeather(){
+                $.ajax ({
                 type: 'GET',
                 url: 'https://api.openweathermap.org/data/2.5/weather?zip=55417,us&appid=5f90b0cc3c4bf2cbea8cb5afc7d4eb2b',
                 success: function (data, status) {
@@ -165,7 +186,52 @@
                 }
                 });
                 }
+
+            </script>
+
+            <script>
+
+                $(document).ready(function(){
+                $('#beach-dropdown').on('change', function() {
+
+                alert($(this).find('option:selected').val());
+                alert($('#beach-dropdown').find('option:selected').val());
+
+
+                })
+                })
+
+            </script>
+
+            <script th:inline="javascript">
+
+                function loadBreaks(){
+
+                /*<![CDATA[*/
+
+                var allBreaksForBeach = /*[[${allBreaksForBeach}]]*/ 'default';
+
+                /*]]>*/
+
+
+                for (var i = 0; i < allBreaksForBeach.length; i++) {
+
+                var breakId = allBreaksForBeach[i].id;
+                var breakName = allBreaksForBeach[i].name;
+
+                var div = '<div class ="col-md-3 text-center border border-light">';
+                div += '<h1>' + breakName + '</h1>';
+                div += '<input type="hidden" id =' + breakId + '</>';
+                div += '</div>';
                 
+
+                $('#breaks').append(div);
+                
+
+                }
+
+                }
+
             </script>
 
 
