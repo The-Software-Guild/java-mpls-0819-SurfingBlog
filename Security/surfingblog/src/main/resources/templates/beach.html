@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="Beach.css">
         <title>SurfSpot</title>
     </head>
-    <body onload="loadWeather(); loadBreaks();">
+    <body onload="loadWeather(); loadBreaks(); loadBeachComments();">
 
         <div class ="container">
 
@@ -34,8 +34,7 @@
                         </select>
                     </div>
 
-                    <p><a href="#" th:href="@{/beach(id=303)}">Go!</a></p>
-
+                    <p><a href="#" th:href="@{/beach(id=301)}">Go!</a></p>
 
                 </div>
 
@@ -63,14 +62,41 @@
             <br>
 
             <div class ="row" id = "breaks">
-                
+
             </div>
 
             <br>
 
             <div class ="row">
                 <div class ="col-md-1"></div>
-                <div class ="col-md-10 text-center border border-light"><h1>User Comments Section</h1></div>
+                <div class ="col-md-10 text-center border border-light" id = "beach-user-comments">
+
+                    <h1>User Comments Section</h1>
+
+        
+
+                    <div class="row m-4">
+                        <div class="col-7 text-center m-3">
+                            <form action="addBeachComment" method="POST">
+                                
+                                <div class="form-group row">
+                                    <label for="beachComment" class="col-3 col-form-label">
+                                        Comment</label>
+                                    <textarea class ="form-control" name ="beachComment" id="beachComment" rows="3">
+
+                                    </textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Add Comment!</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
                 <div class ="col-md-1"></div>
             </div>
 
@@ -223,16 +249,57 @@
                 div += '<h1>' + breakName + '</h1>';
                 div += '<input type="hidden" id =' + breakId + '</>';
                 div += '</div>';
-                
 
                 $('#breaks').append(div);
-                
+
 
                 }
 
                 }
 
             </script>
+
+            <script th:inline="javascript">
+
+                function loadBeachComments(){
+
+                /*<![CDATA[*/
+
+                var beachComments = /*[[${beachComments}]]*/ 'default';
+
+                /*]]>*/
+
+
+                for (var i = 0; i < beachComments.length; i++) {
+
+                var beachCommentId = beachComments[i].id;
+                var beachCommentText = beachComments[i].commentText;
+                var beachCommentUser = beachComments[i].user.username;
+
+                var div = '<div class ="row-md-3 text-center border border-light">';
+                div += '<div class ="col-md-2">'
+                div += beachCommentUser
+                div += '</div>'
+                div += '<div class ="col-md-9">'
+                div += beachCommentText
+                div += '</div>'
+                div += '</div>';
+
+                $('#beach-user-comments').append(div);
+
+
+                }
+
+                }
+
+            </script>
+
+
+
+
+
+
+
 
 
 
