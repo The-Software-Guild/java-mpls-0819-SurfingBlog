@@ -87,6 +87,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -94,6 +95,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break break3 = new Break();
@@ -101,6 +103,7 @@ public class SurfingDbDaoTest {
             break3.setBeach(addedBeach);
             break3.setLatitude(new BigDecimal("20.716634"));
             break3.setLongitude(new BigDecimal("-158.214965"));
+            break3.setBlog("test3");
             Break addedBreak3 = toTest.addBreak(break3);
 
             List<Break> allBreaks = toTest.getBreaksByBeach(addedBeach.getId());
@@ -113,6 +116,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), firstBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716179"), firstBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214676"), firstBreak.getLongitude());
+            assertEquals("test", firstBreak.getBlog());
 
             Break secondBreak = allBreaks.get(1);
             assertEquals(addedBreak2.getId(), secondBreak.getId());
@@ -120,6 +124,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), secondBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716185"), secondBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214684"), secondBreak.getLongitude());
+            assertEquals("test2", secondBreak.getBlog());
 
             Break thirdBreak = allBreaks.get(2);
             assertEquals(addedBreak3.getId(), thirdBreak.getId());
@@ -127,6 +132,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), thirdBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716634"), thirdBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214965"), thirdBreak.getLongitude());
+            assertEquals("test3", thirdBreak.getBlog());
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
@@ -148,6 +154,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -155,6 +162,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break break3 = new Break();
@@ -162,8 +170,8 @@ public class SurfingDbDaoTest {
             break3.setBeach(addedBeach);
             break3.setLatitude(new BigDecimal("20.716634"));
             break3.setLongitude(new BigDecimal("-158.214965"));
+            break3.setBlog("test3");
             Break addedBreak3 = toTest.addBreak(break3);
-
             List<Break> allBreaks = toTest.getBreaksByBeach(9382);
 
             fail();
@@ -286,6 +294,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -348,6 +357,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -1097,6 +1107,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -1104,6 +1115,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break break3 = new Break();
@@ -1111,6 +1123,7 @@ public class SurfingDbDaoTest {
             break3.setBeach(addedBeach);
             break3.setLatitude(new BigDecimal("20.716634"));
             break3.setLongitude(new BigDecimal("-158.214965"));
+            break3.setBlog("test3");
             Break addedBreak3 = toTest.addBreak(break3);
 
             List<Break> allBreaks = toTest.getAllBreaks();
@@ -1123,6 +1136,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), firstBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716179"), firstBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214676"), firstBreak.getLongitude());
+            assertEquals("test", firstBreak.getBlog());
 
             Break secondBreak = allBreaks.get(1);
             assertEquals(addedBreak2.getId(), secondBreak.getId());
@@ -1130,6 +1144,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), secondBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716185"), secondBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214684"), secondBreak.getLongitude());
+            assertEquals("test2", secondBreak.getBlog());
 
             Break thirdBreak = allBreaks.get(2);
             assertEquals(addedBreak3.getId(), thirdBreak.getId());
@@ -1137,6 +1152,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), thirdBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716634"), thirdBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214965"), thirdBreak.getLongitude());
+            assertEquals("test3", thirdBreak.getBlog());
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
@@ -1161,6 +1177,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -1168,6 +1185,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break toCheck = toTest.getBreakById(addedBreak2.getId());
@@ -1176,6 +1194,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), toCheck.getBeach().getId());
             assertEquals(new BigDecimal("20.716185"), toCheck.getLatitude());
             assertEquals(new BigDecimal("-158.214684"), toCheck.getLongitude());
+            assertEquals("test2", toCheck.getBlog());
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
@@ -1196,6 +1215,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -1203,6 +1223,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break toCheck = toTest.getBreakById(5331);
@@ -1254,6 +1275,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(beach1);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             fail();
@@ -1278,8 +1300,11 @@ public class SurfingDbDaoTest {
             break1.setBeach(beach1);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
+
             fail();
+
         } catch (SurfingDaoException ex) {
             fail();
         } catch (InvalidIdException ex) {
@@ -1303,6 +1328,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break updatedBreak = new Break();
@@ -1311,6 +1337,7 @@ public class SurfingDbDaoTest {
             updatedBreak.setBeach(addedBeach);
             updatedBreak.setLatitude(new BigDecimal("20.735678"));
             updatedBreak.setLongitude(new BigDecimal("-158.214583"));
+            updatedBreak.setBlog("test3");
             toTest.updateBreak(updatedBreak);
 
             Break toCheck = toTest.getBreakById(addedBreak1.getId());
@@ -1319,6 +1346,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), toCheck.getBeach().getId());
             assertEquals(new BigDecimal("20.735678"), toCheck.getLatitude());
             assertEquals(new BigDecimal("-158.214583"), toCheck.getLongitude());
+            assertEquals("test3", toCheck.getBlog());
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
@@ -1339,6 +1367,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break updatedBreak = null;
@@ -1366,6 +1395,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Beach nullBeach = null;
@@ -1376,6 +1406,7 @@ public class SurfingDbDaoTest {
             updatedBreak.setBeach(nullBeach);
             updatedBreak.setLatitude(new BigDecimal("20.735678"));
             updatedBreak.setLongitude(new BigDecimal("-158.214583"));
+            updatedBreak.setBlog("test");
             toTest.updateBreak(updatedBreak);
 
             fail();
@@ -1400,6 +1431,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Beach invalidBeach = new Beach();
@@ -1413,6 +1445,7 @@ public class SurfingDbDaoTest {
             updatedBreak.setBeach(invalidBeach);
             updatedBreak.setLatitude(new BigDecimal("20.735678"));
             updatedBreak.setLongitude(new BigDecimal("-158.214583"));
+            updatedBreak.setBlog("test");
             toTest.updateBreak(updatedBreak);
 
             fail();
@@ -1440,6 +1473,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -1447,6 +1481,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break break3 = new Break();
@@ -1454,6 +1489,7 @@ public class SurfingDbDaoTest {
             break3.setBeach(addedBeach);
             break3.setLatitude(new BigDecimal("20.716634"));
             break3.setLongitude(new BigDecimal("-158.214965"));
+            break3.setBlog("test3");
             Break addedBreak3 = toTest.addBreak(break3);
 
             toTest.deleteBreak(addedBreak3.getId());
@@ -1468,6 +1504,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), firstBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716179"), firstBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214676"), firstBreak.getLongitude());
+            assertEquals("test", firstBreak.getBlog());
 
             Break secondBreak = allBreaks.get(1);
             assertEquals(addedBreak2.getId(), secondBreak.getId());
@@ -1475,6 +1512,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), secondBreak.getBeach().getId());
             assertEquals(new BigDecimal("20.716185"), secondBreak.getLatitude());
             assertEquals(new BigDecimal("-158.214684"), secondBreak.getLongitude());
+            assertEquals("test2", secondBreak.getBlog());
 
         } catch (SurfingDaoException | InvalidIdException ex) {
             fail();
@@ -1495,6 +1533,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -1502,6 +1541,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.716185"));
             break2.setLongitude(new BigDecimal("-158.214684"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             Break break3 = new Break();
@@ -1509,6 +1549,7 @@ public class SurfingDbDaoTest {
             break3.setBeach(addedBeach);
             break3.setLatitude(new BigDecimal("20.716634"));
             break3.setLongitude(new BigDecimal("-158.214965"));
+            break3.setBlog("test3");
             Break addedBreak3 = toTest.addBreak(break3);
 
             toTest.deleteBreak(2988);
@@ -2096,6 +2137,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2103,6 +2145,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2167,6 +2210,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2174,6 +2218,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2225,6 +2270,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -2265,6 +2311,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = null;
@@ -2317,6 +2364,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -2344,6 +2392,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(beach1);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -2375,6 +2424,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
 
             BreakComment bc1 = new BreakComment();
             bc1.setUser(userDao.getUserById(2));
@@ -2405,6 +2455,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             SiteUser invalidUser = new SiteUser();
@@ -2439,6 +2490,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(beach1);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -2473,6 +2525,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2480,6 +2533,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2520,6 +2574,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2527,6 +2582,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2560,6 +2616,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = null;
@@ -2599,6 +2656,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2606,6 +2664,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2643,6 +2702,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Beach beach2 = null;
@@ -2652,6 +2712,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(beach2);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2689,6 +2750,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2697,6 +2759,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
 
             BreakComment bc1 = new BreakComment();
             bc1.setUser(userDao.getUserById(2));
@@ -2734,6 +2797,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2741,6 +2805,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(addedBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2784,6 +2849,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             Break break2 = new Break();
@@ -2791,6 +2857,7 @@ public class SurfingDbDaoTest {
             break2.setBeach(invalidBeach);
             break2.setLatitude(new BigDecimal("20.725689"));
             break2.setLongitude(new BigDecimal("-158.214351"));
+            break2.setBlog("test2");
             Break addedBreak2 = toTest.addBreak(break2);
 
             BreakComment bc1 = new BreakComment();
@@ -2831,6 +2898,7 @@ public class SurfingDbDaoTest {
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
 
             BreakComment bc1 = new BreakComment();
@@ -2882,36 +2950,37 @@ public class SurfingDbDaoTest {
             beach1.setName("Beach A");
             beach1.setZipCode(96701);
             Beach addedBeach = toTest.addBeach(beach1);
-            
+
             Break break1 = new Break();
             break1.setName("Break A");
             break1.setBeach(addedBeach);
             break1.setLatitude(new BigDecimal("20.716179"));
             break1.setLongitude(new BigDecimal("-158.214676"));
+            break1.setBlog("test");
             Break addedBreak1 = toTest.addBreak(break1);
-            
+
             BreakComment bc1 = new BreakComment();
             bc1.setUser(userDao.getUserById(2));
             bc1.setBeachBreak(addedBreak1);
             bc1.setCommentText("perspiciatis unde omnis iste natus error sit volupt");
             BreakComment addedBC1 = toTest.addBreakComment(bc1);
-            
+
             BreakComment bc2 = new BreakComment();
             bc2.setUser(userDao.getUserById(2));
             bc2.setBeachBreak(addedBreak1);
             bc2.setCommentText("dolor sit amet, consectetu");
             BreakComment addedBC2 = toTest.addBreakComment(bc2);
-            
+
             BreakComment bc3 = new BreakComment();
             bc3.setUser(userDao.getUserById(2));
             bc3.setBeachBreak(addedBreak1);
             bc3.setCommentText("commodi consequatur? Quis autem vel eum iure");
             BreakComment addedBC3 = toTest.addBreakComment(bc3);
-            
+
             toTest.deleteBreakComment(4529);
-            
+
             fail();
-            
+
         } catch (SurfingDaoException ex) {
             fail();
         } catch (InvalidIdException ex) {

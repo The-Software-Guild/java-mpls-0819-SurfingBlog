@@ -23,6 +23,8 @@ public class Break {
     private BigDecimal latitude;
 
     private BigDecimal longitude;
+    
+    private String blog;
 
     /**
      * @return the id
@@ -92,6 +94,20 @@ public class Break {
      */
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
+    }
+
+    /**
+     * @return the blog
+     */
+    public String getBlog() {
+        return blog;
+    }
+
+    /**
+     * @param blog the blog to set
+     */
+    public void setBlog(String blog) {
+        this.blog = blog;
     }
 
 }

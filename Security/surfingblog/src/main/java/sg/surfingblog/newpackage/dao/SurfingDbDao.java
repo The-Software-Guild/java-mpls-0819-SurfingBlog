@@ -52,7 +52,7 @@ public class SurfingDbDao implements SurfingDao {
             throw new InvalidIdException("Beach not found", ex);
         }
 
-        String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, be.id beachid, be.`name` beachname, be.zipcode\n"
+        String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, br.blog, be.id beachid, be.`name` beachname, be.zipcode\n"
                 + "From break br\n"
                 + "Inner Join beach be On br.beachId = be.id\n"
                 + "Where beachId = ?";
@@ -91,7 +91,7 @@ public class SurfingDbDao implements SurfingDao {
             throw new InvalidIdException("BeachId, UserId, or BreakId not found", ex);
         }
 
-        String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
+        String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, br.blog, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From break_comment brc\n"
                 + "Inner Join `User` u On brc.userid = u.id\n"
                 + "Inner Join break br On brc.breakid = br.id\n"
@@ -356,7 +356,7 @@ public class SurfingDbDao implements SurfingDao {
     @Override
     public List<Break> getAllBreaks() {
 
-        String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, be.id beachid, be.`name` beachname, be.zipcode\n"
+        String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, br.blog, be.id beachid, be.`name` beachname, be.zipcode\n"
                 + "From break br\n"
                 + "Inner Join beach be On br.beachId = be.id";
 
@@ -368,7 +368,7 @@ public class SurfingDbDao implements SurfingDao {
     @Override
     public Break getBreakById(int id) throws InvalidIdException {
 
-        String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, be.id beachid, be.`name` beachname, be.zipcode\n"
+        String query = "Select br.id breakid, br.`name` breakname, br.latitude, br.longitude, br.blog, be.id beachid, be.`name` beachname, be.zipcode\n"
                 + "From break br\n"
                 + "Inner Join beach be On br.beachId = be.id\n"
                 + "Where br.id = ?";
@@ -399,9 +399,9 @@ public class SurfingDbDao implements SurfingDao {
             throw new InvalidIdException("Beach not found", ex);
         }
 
-        String insert = "Insert into Break(`name`, beachid, latitude, longitude)\n"
+        String insert = "Insert into Break(`name`, beachid, latitude, longitude, blog)\n"
                 + "Values \n"
-                + "(?, ?, ?, ?)";
+                + "(?, ?, ?, ?, ?)";
 
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
 
@@ -414,6 +414,7 @@ public class SurfingDbDao implements SurfingDao {
                 toReturn.setInt(2, toAdd.getBeach().getId());
                 toReturn.setBigDecimal(3, toAdd.getLatitude());
                 toReturn.setBigDecimal(4, toAdd.getLongitude());
+                toReturn.setString(5, toAdd.getBlog());
 
                 return toReturn;
             }
@@ -444,7 +445,8 @@ public class SurfingDbDao implements SurfingDao {
                 + "Set `name` = ?,\n"
                 + "beachid = ?,\n"
                 + "latitude = ?,\n"
-                + "longitude = ?\n"
+                + "longitude = ?,\n"
+                + "blog = ?\n"
                 + "Where id = ?";
 
         int rowsAffected = template.update(updateStatement,
@@ -452,6 +454,7 @@ public class SurfingDbDao implements SurfingDao {
                 updatedBreak.getBeach().getId(),
                 updatedBreak.getLatitude(),
                 updatedBreak.getLongitude(),
+                updatedBreak.getBlog(),
                 updatedBreak.getId());
 
         if (rowsAffected == 0) {
@@ -614,7 +617,7 @@ public class SurfingDbDao implements SurfingDao {
     @Override
     public List<BreakComment> getAllBreakComments() {
 
-        String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
+        String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, br.blog, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From break_comment brc\n"
                 + "Inner Join `User` u On brc.userid = u.id\n"
                 + "Inner Join break br On brc.breakid = br.id\n"
@@ -628,7 +631,7 @@ public class SurfingDbDao implements SurfingDao {
     @Override
     public BreakComment getBreakCommentById(int id) throws InvalidIdException {
 
-        String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
+        String query = "Select brc.id commentid, brc.userid, brc.breakid, brc.`comment`, br.`name` breakname, br.beachid, br.latitude, br.longitude, br.blog, be.`name` beachname, be.zipcode, u.username, u.`password`, u.enabled\n"
                 + "From break_comment brc\n"
                 + "Inner Join `User` u On brc.userid = u.id\n"
                 + "Inner Join break br On brc.breakid = br.id\n"
@@ -811,6 +814,7 @@ public class SurfingDbDao implements SurfingDao {
             toReturn.setName(results.getString("BreakName"));
             toReturn.setLatitude(results.getBigDecimal("Latitude"));
             toReturn.setLongitude(results.getBigDecimal("Longitude"));
+            toReturn.setBlog(results.getString("Blog"));
 
             Beach toAdd = new Beach();
             toAdd.setId(results.getInt("BeachId"));
@@ -873,6 +877,7 @@ public class SurfingDbDao implements SurfingDao {
             breakToAdd.setBeach(beachToAdd);
             breakToAdd.setLatitude(results.getBigDecimal("Latitude"));
             breakToAdd.setLongitude(results.getBigDecimal("Longitude"));
+            breakToAdd.setBlog(results.getString("Blog"));
             toReturn.setBeachBreak(breakToAdd);
 
             return toReturn;
