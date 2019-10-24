@@ -7,11 +7,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+
         <link rel="stylesheet" href="css/Beach.css">
+
 
         <title>SurfSpot</title>
     </head>
-    <body onload="loadWeather(); loadBreaks(); loadBeachComments();">
+    <body onload="loadBeachComments(); loadDefaultValues();">
 
         <div class ="container">
 
@@ -20,7 +22,7 @@
                 <div class ="col-md-1"></div>
                 <div class ="col-md-1 text-center border border-light" id = "nav-tool"><h3>Nav Tool</h3></div>
                 Username:&nbsp;<span th:text="${#authentication.getPrincipal().getUsername()}" id = "username"></span>
-                
+
             </div>
 
             <br>
@@ -35,19 +37,27 @@
                                         th:value="${beach.id}" 
                                         th:text="${beach.name}"></a>
                             </option>
+
                         </select>
                     </div>
 
-                    <p><a href="#" th:href="@{/beach(id=301)}">Go!</a></p>
+                    <!--<p id = "beachLink"><a href="#" th:href="@{/beach(id=${beach.id})}">Go!</a></p>-->
 
+                    <!--This works: alert($('#beach-dropdown').find('option:selected').val());-->
+
+                    <!--This kinda works: <p id = "beachLink"><a href="#" th:href="@{/beach(id=IDVALUE)}">Go!</a></p>-->
+                    <!--This works: <p id = "beachLink"><a href="#" th:href="@{/beach(id=301)}">Go!</a></p>-->
+                    <!--<a href="#" th:href="@{/beach(id=${beach.id})}">Go!</a>-->
+                    <p id = "beachId"></p>
                 </div>
 
 
 
                 <div class ="col-md-1"></div>
-                <div class ="col-md-8 text-center border border-light" id="beach-name">
+                <div class ="col-md-8 text-center border border-light" id ="beach-name">
 
-                    <h3 th:text="${selectedBeach.name}"/>
+                    <!--<input type="text" name="selectedBeach" id="selectedBeach" 
+                               class="form-control" th:value="${selectedBeach.name}"/>-->
 
                 </div>
 
@@ -77,12 +87,12 @@
 
                     <h1>User Comments Section</h1>
 
-        
+
 
                     <div class="row m-4">
                         <div class="col-7 text-center m-3">
                             <form action="addBeachComment" method="POST">
-                                
+
                                 <div class="form-group row">
                                     <label for="commentText" class="col-3 col-form-label">
                                         Comment</label>
@@ -95,10 +105,6 @@
                             </form>
                         </div>
                     </div>
-
-
-                    
-
 
                 </div>
                 <div class ="col-md-1"></div>
@@ -116,124 +122,170 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
                     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-            
+
             <!--<script type="text/javascript" src="Beach.js"></script>-->
 
-            <script th:inline="javascript">
-
-                $('#test-button').click(function (event){
-
-                $.ajax ({
-                type: 'GET',
-                url: 'https://api.openweathermap.org/data/2.5/weather?zip=55417,us&appid=5f90b0cc3c4bf2cbea8cb5afc7d4eb2b',
-                success: function (data, status) {
-
-                var description = data.weather[0].description;
-                var temp = data.main.temp;
-                var celsius = temp - 272.15;
-                var icon = data.weather[0].icon;
-                var sunriseMill = data.sys.sunrise;
-                var dateSunrise = new Date(sunriseMill * 1000);
-                var realSunrise = dateSunrise.toLocaleTimeString();
-                var sunsetMill = data.sys.sunset;
-                var dateSunset = new Date(sunsetMill * 1000);
-                var realSunset = dateSunset.toLocaleTimeString();
-
-                $('#weather').append("<p>"+ description +"</p>");
-                $('#weather').append("<p><img src=http://openweathermap.org/img/w/" + icon + ".png></img></p>");
-                $('#weather').append("<p> Fahrenheit: "+ Math.round(((celsius*(9/5))+32)) +"°</p>");
-                $('#weather').append("<p> Sunrise: "+ realSunrise +"</p>");
-                $('#weather').append("<p> Sunset: "+ realSunset +"</p>");
-                },
-                error: function() {
-                $('#errorMessages')
-                .append($('<li>')
-                .attr({class: 'list-group-item list-group-item-danger'})
-                .text('Error calling web service.  Please try again later.'));
-                }
-                });
-
-                });
-
-            </script>
+            
 
             <script th:inline="javascript">
 
-                function loadWeather(){
-                $.ajax ({
-                type: 'GET',
-                url: 'https://api.openweathermap.org/data/2.5/weather?zip=55417,us&appid=5f90b0cc3c4bf2cbea8cb5afc7d4eb2b',
-                success: function (data, status) {
+                function loadWeather(beachZip) {
+                    
+                    $('#weather').html("");
+       
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://api.openweathermap.org/data/2.5/weather?zip=' + beachZip + ',us&appid=5f90b0cc3c4bf2cbea8cb5afc7d4eb2b',
+                        success: function (data, status) {
 
-                var description = data.weather[0].description;
-                var temp = data.main.temp;
-                var celsius = temp - 272.15;
-                var icon = data.weather[0].icon;
-                var sunriseMill = data.sys.sunrise;
-                var dateSunrise = new Date(sunriseMill * 1000);
-                var realSunrise = dateSunrise.toLocaleTimeString();
-                var sunsetMill = data.sys.sunset;
-                var dateSunset = new Date(sunsetMill * 1000);
-                var realSunset = dateSunset.toLocaleTimeString();
+                            var description = data.weather[0].description;
+                            var temp = data.main.temp;
+                            var celsius = temp - 272.15;
+                            var icon = data.weather[0].icon;
+                            var sunriseMill = data.sys.sunrise;
+                            var dateSunrise = new Date(sunriseMill * 1000);
+                            var realSunrise = dateSunrise.toLocaleTimeString();
+                            var sunsetMill = data.sys.sunset;
+                            var dateSunset = new Date(sunsetMill * 1000);
+                            var realSunset = dateSunset.toLocaleTimeString();
 
-                $('#weather').append("<p>"+ description +"</p>");
-                $('#weather').append("<p><img src=http://openweathermap.org/img/w/" + icon + ".png></img></p>");
-                $('#weather').append("<p> Fahrenheit: "+ Math.round(((celsius*(9/5))+32)) +"°</p>");
-                $('#weather').append("<p> Sunrise: "+ realSunrise +"</p>");
-                $('#weather').append("<p> Sunset: "+ realSunset +"</p>");
-                },
-                error: function() {
-                $('#errorMessages')
-                .append($('<li>')
-                .attr({class: 'list-group-item list-group-item-danger'})
-                .text('Error calling web service.  Please try again later.'));
-                }
-                });
+                            $('#weather').append("<p>" + description + "</p>");
+                            $('#weather').append("<p><img src=http://openweathermap.org/img/w/" + icon + ".png></img></p>");
+                            $('#weather').append("<p> Fahrenheit: " + Math.round(((celsius * (9 / 5)) + 32)) + "°</p>");
+                            $('#weather').append("<p> Sunrise: " + realSunrise + "</p>");
+                            $('#weather').append("<p> Sunset: " + realSunset + "</p>");
+                        },
+                        error: function () {
+                            $('#errorMessages')
+                                    .append($('<li>')
+                                            .attr({class: 'list-group-item list-group-item-danger'})
+                                            .text('Error calling web service.  Please try again later.'));
+                        }
+                    });
                 }
 
             </script>
 
             <script>
 
-                $(document).ready(function(){
-                $('#beach-dropdown').on('change', function() {
+                $(document).ready(function () {
+                    $('#beach-dropdown').on('change', function () {
 
-                alert($(this).find('option:selected').val());
-                alert($('#beach-dropdown').find('option:selected').val());
-                
-                
-
-
+                        updateBeachName();
+                        updateBreaks();
+                    })
                 })
-                })
+
+            </script>
+
+
+            <script th:inline="javascript">
+
+                function updateBeachName() {
+
+                    var beachId = $('#beach-dropdown').find('option:selected').val();
+
+                    var url = 'http://localhost:8080/beach/' + beachId;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (data, status) {
+
+                            $('#beach-name').html("<h3>" + data.name + "</h3>");
+                            loadWeather(data.zipCode);
+
+                        },
+                        error: function () {
+                            $('#errorMessages')
+                                    .append($('<li>')
+                                            .attr({class: 'list-group-item list-group-item-danger'})
+                                            .text('Error calling web service.  Please try again later.'));
+                        }
+                    });
+                    
+                    
+
+
+
+                }
+
+
+
+
+
+            </script>
+
+
+            <script th:inline="javascript">
+
+                function updateBreaks() {
+
+                    var beachId = $('#beach-dropdown').find('option:selected').val();
+
+                    var url = 'http://localhost:8080/beach/beachBreaks/' + beachId;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (breakArray) {
+
+                            $('#breaks').html("");
+                            $.each(breakArray, function (index, beachBreak) {
+
+                                var breakId = beachBreak.id;
+                                var breakName = beachBreak.name;
+                                breakDivs = '<div class ="col-md-3 text-center border border-light">';
+                                breakDivs += '<h1>' + breakName + '</h1>';
+                                breakDivs += '<input type="hidden" id =' + breakId + '</>';
+                                breakDivs += '</div>';
+                                $('#breaks').append(breakDivs);
+                            })
+
+                        },
+
+                        error: function () {
+                            $('#errorMessages')
+                                    .append($('<li>')
+                                            .attr({class: 'list-group-item list-group-item-danger'})
+                                            .text('Error calling web service.  Please try again later.'));
+                        }
+
+                    });
+
+                }
+
+
 
             </script>
 
             <script th:inline="javascript">
 
-                function loadBreaks(){
+                function loadDefaultValues() {
 
-                /*<![CDATA[*/
+                    /*<![CDATA[*/
 
-                var allBreaksForBeach = /*[[${allBreaksForBeach}]]*/ 'default';
-
-                /*]]>*/
-
-
-                for (var i = 0; i < allBreaksForBeach.length; i++) {
-
-                var breakId = allBreaksForBeach[i].id;
-                var breakName = allBreaksForBeach[i].name;
-
-                var div = '<div class ="col-md-3 text-center border border-light">';
-                div += '<h1>' + breakName + '</h1>';
-                div += '<input type="hidden" id =' + breakId + '</>';
-                div += '</div>';
-
-                $('#breaks').append(div);
+                    var allBreaksForBeach = /*[[${allBreaksForBeach}]]*/ 'default';
+                    var selectedBeach = /*[[${selectedBeach}]]*/ 'default';
+           
+                    /*]]>*/
 
 
-                }
+                    for (var i = 0; i < allBreaksForBeach.length; i++) {
+
+                        var breakId = allBreaksForBeach[i].id;
+                        var breakName = allBreaksForBeach[i].name;
+                        var div = '<div class ="col-md-3 text-center border border-light">';
+                        div += '<h1>' + breakName + '</h1>';
+                        div += '<input type="hidden" id =' + breakId + '</>';
+                        div += '</div>';
+                        $('#breaks').append(div);
+                    }
+                    
+                    
+                    $('#beach-name').html("<h3>" + selectedBeach.name + "</h3>");
+                    
+                    loadWeather(selectedBeach.zipCode);
 
                 }
 
@@ -241,47 +293,44 @@
 
             <script th:inline="javascript">
 
-                function loadBeachComments(){
+                function loadBeachComments() {
 
-                /*<![CDATA[*/
+                    /*<![CDATA[*/
 
-                var beachComments = /*[[${beachComments}]]*/ 'default';
-
-                /*]]>*/
-
-
-                for (var i = 0; i < beachComments.length; i++) {
-
-                var beachCommentId = beachComments[i].id;
-                var beachCommentText = beachComments[i].commentText;
-                var beachCommentUser = beachComments[i].user.username;
-
-                var div = '<div class ="row-md-3 text-center border border-light">';
-                div += '<div class ="col-md-2">'
-                div += beachCommentUser
-                div += '</div>'
-                div += '<div class ="col-md-9">'
-                div += beachCommentText
-                div += '</div>'
-                div += '</div>';
-
-                $('#beach-user-comments').append(div);
+                    var beachComments = /*[[${beachComments}]]*/ 'default';
+                    /*]]>*/
 
 
-                }
+                    for (var i = 0; i < beachComments.length; i++) {
+
+                        var beachCommentId = beachComments[i].id;
+                        var beachCommentText = beachComments[i].commentText;
+                        var beachCommentUser = beachComments[i].user.username;
+                        var div = '<div class ="row-md-3 text-center border border-light">';
+                        div += '<div class ="col-md-2">'
+                        div += beachCommentUser
+                        div += '</div>'
+                        div += '<div class ="col-md-9">'
+                        div += beachCommentText
+                        div += '</div>'
+                        div += '</div>';
+                        $('#beach-user-comments').append(div);
+                    }
 
                 }
 
             </script>
+            
+            <script th:inline="javascript">
 
+                function testMessage(){
+                    
+                    
+                    alert("The div has been clicked");
+                    
+                }
 
-
-
-
-
-
-
-
+            </script>
 
     </body>
 

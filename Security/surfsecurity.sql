@@ -7,7 +7,7 @@ create table `user`(
 `id` int primary key auto_increment,
 `username` varchar(30) not null unique,
 `password` varchar(100) not null,
-`enabled` boolean not null);
+`enabled` boolean not null default true);
 
 create table `role`(
 `id` int primary key auto_increment,
