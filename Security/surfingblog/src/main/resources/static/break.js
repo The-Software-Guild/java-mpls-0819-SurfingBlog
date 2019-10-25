@@ -52,9 +52,9 @@ function getBreakComments(breakId) {
                 div += '</div>'
                 div += '<div class ="col-md-9">'
                 div += breakCommentText
-                div += '<div>'
-                div += '<button type="button" id="breakComment-' + breakCommentId + '" class="btn btn-default">Delete</button>'
                 div += '</div>'
+                div += '<div>'
+                div += '<button type="button" onclick ="deleteBreakComment(' + breakCommentId + ')" class="btn btn-default">Delete</button>'
                 div += '</div>'
                 div += '</div>';
 
