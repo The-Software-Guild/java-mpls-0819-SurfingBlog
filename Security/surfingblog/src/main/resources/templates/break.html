@@ -42,11 +42,18 @@
                     <div class="col-9">
                         <select id="break" name="breakId" class="form-control" >
                             <a class="dropdown-item" href="#">
-                                <option th:each="break : ${allBreaks}"
-                                    th:value="${break.id}" 
-                                    th:text="${break.name}"></a>
-                            </option>
+                                <option th:each="break : ${allBreaks}" 
+                                        th:value="${break.id}" 
+                                        th:text="${break.name}"
+                                        th:selected="${selectedBreak.id}==${break.id}"
+                                </option>
                         </select>
+                    </div>
+
+                    <h1 th:text="${selectedBreak.name}"></h1>
+                    
+                    <div>
+                        <button type="button" id="goToBreak" class="btn btn-default">Go!</button>
                     </div>
                 </div>
 
