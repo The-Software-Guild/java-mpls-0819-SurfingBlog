@@ -1,5 +1,5 @@
 
-$('#goToBreak').click(function (event) {
+$('#break-dropdown').on('change', function () {
     var breakId = $('#break-dropdown').find('option:selected').val();
     getBreakById(breakId);
     emptyBreakComments();
@@ -45,6 +45,11 @@ function getBreakComments(breakId) {
                 var breakCommentId = beachComment.id;
                 var breakCommentUser = beachComment.user.username;
                 var breakCommentText = beachComment.commentText;
+                
+//                $('#id').val(breakCommentId);
+//                $('#userName').val(breakCommentUser);
+//                $('#break-user-comments').val(breakCommentText);
+                
 
                 var div = '<div class ="row-md-12 text-center border border-light>';
                 div += '<div class ="col-md-3">'
