@@ -40,6 +40,7 @@ create table break(
 `beachId` int not null, 
 latitude decimal(9,6), 
 longitude decimal(9,6),
+blog varchar(5000) not null,
 foreign key fk_break_beach(beachId)
 references beach(`id`)
 );
@@ -110,17 +111,17 @@ values
 ('302','Beach B','96712'),
 ('303','Beach C','96707');
 
-insert into break (id, `name`, beachId, latitude, longitude)
+insert into break (id, `name`, beachId, latitude, longitude, blog)
 values
-('801','Break A - Break 1','301','20.716179','-158.214676'),
-('802','Break A - Break 2','301','20.716185','-158.214684'),
-('803','Break A - Break 3','301','20.716634','-158.214965'),
-('804','Break B - Break 1','302','20.715711','-158.211234'),
-('805','Break B - Break 2','302','20.725869','-158.214674'),
-('806','Break B - Break 3','302','20.735678','-158.214583'),
-('807','Break C - Break 1','303','20.723456','-158.214637'),
-('808','Break C - Break 2','303','20.725689','-158.214351'),
-('809','Break C - Break 3','303','20.725657','-158.214225');
+('801','Break A - Break 1','301','20.716179','-158.214676', 'Remain valley who mrs uneasy remove wooded him you.'),
+('802','Break A - Break 2','301','20.716185','-158.214684', 'Pasture he invited mr company shyness. Domestic replying she resolved him for did. Rather in lasted no within no.'),
+('803','Break A - Break 3','301','20.716634','-158.214965', 'Effect if in up no depend seemed. Ecstatic elegance gay but disposed. We me rent been part what.'),
+('804','Break B - Break 1','302','20.715711','-158.211234', 'In by an appetite no humoured returned informed. Possession so comparison inquietude he he conviction no decisively.'),
+('805','Break B - Break 2','302','20.725869','-158.214674', 'Boy favourable day can introduced sentiments entreaties.'),
+('806','Break B - Break 3','302','20.735678','-158.214583', 'Do play they miss give so up. Words to up style of since world. We leaf to snug on no need.'),
+('807','Break C - Break 1','303','20.723456','-158.214637', 'Moments its musical age explain. But extremity sex now education concluded earnestly her continual.'),
+('808','Break C - Break 2','303','20.725689','-158.214351', 'He unaffected sympathize discovered at no am conviction principles.'),
+('809','Break C - Break 3','303','20.725657','-158.214225', 'In on announcing if of comparison pianoforte projection. Maids hoped gay yet bed asked blind dried point.');
 
 insert into break_comment(id, userId, breakid, `comment`)
 values
