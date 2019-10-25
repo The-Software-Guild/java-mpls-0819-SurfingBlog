@@ -37,7 +37,7 @@ public class BreakController {
         List<Break> allBreaks = sDao.getAllBreaks();
         model.addAttribute("allBreaks", allBreaks);
         
-        Break selectedBreak = sDao.getBreakById(803);
+        Break selectedBreak = sDao.getBreakById(801);
         model.addAttribute("selectedBreak", selectedBreak);
         
         List<BreakComment> breakComments = sDao.getAllBreakComments();
@@ -46,7 +46,6 @@ public class BreakController {
         return "break";
     }
     
-
  
     
 }
