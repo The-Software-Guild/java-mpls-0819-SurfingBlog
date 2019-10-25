@@ -17,89 +17,84 @@
 
         <div class="container">
 
-            <div class="col text-center border border-dark">
-                <div class="row m-4 border border-dark">
-                    <h1><a href="/" class="text-dark">Beach Breaks</a></h1>
+
+
+
+
+
+            <div class = "row">
+
+                <div class ="col-md-4 text-center border border-light" id="break-dropdown">
+                    <div class="col-9">
+                        <select id="break" name="breakId" class="form-control" >
+                            <a class="dropdown-item" href="#">
+                                <option th:each="break : ${allBreaks}" 
+                                        th:value="${break.id}" 
+                                        th:text="${break.name}"></a>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="button" id="goToBreak" class="btn btn-default">Go!</button>
+                    </div>
+
                 </div>
+
+                <div class ="col-md-8 text-center border border-light" >
+
+                    <p id="breakName"></p>
+
+                </div>
+
+
             </div>
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>latitude</th>
+                                <th>longitude</th>
+                            </tr>     
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="latitude"></td>
+                                <td id="longitude"></td>
+                            </tr>                    
+                        </tbody>                     
+                    </table>
+                </div>    
+                <!--             
+                   <div class="col-md-4"></div> 
+                                <div class="col-md-4" id="latitude"></div> 
+                                <div class="col-md-4" id="longitude"></div> -->
+            </div>
+
             <div>
-
+                <p id="blogText" class="text-center"></p>
             </div>
 
-
-
-        <div class = "row">
-
-            <div class ="col-md-4 text-center border border-light" id="break-dropdown">
-                <div class="col-9">
-                    <select id="break" name="breakId" class="form-control" >
-                        <a class="dropdown-item" href="#">
-                            <option th:each="break : ${allBreaks}" 
-                                    th:value="${break.id}" 
-                                    th:text="${break.name}"></a>
-                        </option>
-                    </select>
-                </div>
-
-                <div>
-                    <button type="button" id="goToBreak" class="btn btn-default">Go!</button>
-                </div>
-
-            </div>
-
-            <div class ="col-md-8 text-center border border-light" >
-
-                <p id="breakName"></p>
-
-            </div>
-
-
-        </div>
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>latitude</th>
-                            <th>longitude</th>
-                        </tr>     
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="latitude"></td>
-                            <td id="longitude"></td>
-                        </tr>                    
-                    </tbody>                     
-                </table>
-            </div>    
-            <!--             
-               <div class="col-md-4"></div> 
-                            <div class="col-md-4" id="latitude"></div> 
-                            <div class="col-md-4" id="longitude"></div> -->
-        </div>
-
-        <div>
-            <p id="blogText" class="text-center"></p>
-        </div>
-
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>User</th>
-                        </tr>     
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="id"></td>
-                            <td id="userName"></td>
-                            <td id="break-user-comments"></td>
-                        </tr>                    
-                    </tbody>                     
-                </table>
-            </div>    
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>User</th>
+                            </tr>     
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="id"></td>
+                                <td id="userName"></td>
+                                <td id="break-user-comments"></td>
+                            </tr>                    
+                        </tbody>                     
+                    </table>
+                </div>  
+            </div> 
 
 
             <!--            <div class = "row">
