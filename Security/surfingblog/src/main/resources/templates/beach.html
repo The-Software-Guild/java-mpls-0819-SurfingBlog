@@ -125,44 +125,44 @@
 
             <!--<script type="text/javascript" src="Beach.js"></script>-->
 
-            
+
 
             <script th:inline="javascript">
 
-                function loadWeather(beachZip) {
-                    
-                    $('#weather').html("");
-       
-                    $.ajax({
-                        type: 'GET',
-                        url: 'https://api.openweathermap.org/data/2.5/weather?zip=' + beachZip + ',us&appid=5f90b0cc3c4bf2cbea8cb5afc7d4eb2b',
-                        success: function (data, status) {
+        function loadWeather(beachZip) {
 
-                            var description = data.weather[0].description;
-                            var temp = data.main.temp;
-                            var celsius = temp - 272.15;
-                            var icon = data.weather[0].icon;
-                            var sunriseMill = data.sys.sunrise;
-                            var dateSunrise = new Date(sunriseMill * 1000);
-                            var realSunrise = dateSunrise.toLocaleTimeString();
-                            var sunsetMill = data.sys.sunset;
-                            var dateSunset = new Date(sunsetMill * 1000);
-                            var realSunset = dateSunset.toLocaleTimeString();
+            $('#weather').html("");
 
-                            $('#weather').append("<p>" + description + "</p>");
-                            $('#weather').append("<p><img src=http://openweathermap.org/img/w/" + icon + ".png></img></p>");
-                            $('#weather').append("<p> Fahrenheit: " + Math.round(((celsius * (9 / 5)) + 32)) + "°</p>");
-                            $('#weather').append("<p> Sunrise: " + realSunrise + "</p>");
-                            $('#weather').append("<p> Sunset: " + realSunset + "</p>");
-                        },
-                        error: function () {
-                            $('#errorMessages')
-                                    .append($('<li>')
-                                            .attr({class: 'list-group-item list-group-item-danger'})
-                                            .text('Error calling web service.  Please try again later.'));
-                        }
-                    });
+            $.ajax({
+                type: 'GET',
+                url: 'https://api.openweathermap.org/data/2.5/weather?zip=' + beachZip + ',us&appid=5f90b0cc3c4bf2cbea8cb5afc7d4eb2b',
+                success: function (data, status) {
+
+                    var description = data.weather[0].description;
+                    var temp = data.main.temp;
+                    var celsius = temp - 272.15;
+                    var icon = data.weather[0].icon;
+                    var sunriseMill = data.sys.sunrise;
+                    var dateSunrise = new Date(sunriseMill * 1000);
+                    var realSunrise = dateSunrise.toLocaleTimeString();
+                    var sunsetMill = data.sys.sunset;
+                    var dateSunset = new Date(sunsetMill * 1000);
+                    var realSunset = dateSunset.toLocaleTimeString();
+
+                    $('#weather').append("<p>" + description + "</p>");
+                    $('#weather').append("<p><img src=http://openweathermap.org/img/w/" + icon + ".png></img></p>");
+                    $('#weather').append("<p> Fahrenheit: " + Math.round(((celsius * (9 / 5)) + 32)) + "°</p>");
+                    $('#weather').append("<p> Sunrise: " + realSunrise + "</p>");
+                    $('#weather').append("<p> Sunset: " + realSunset + "</p>");
+                },
+                error: function () {
+                    $('#errorMessages')
+                            .append($('<li>')
+                                    .attr({class: 'list-group-item list-group-item-danger'})
+                                    .text('Error calling web service.  Please try again later.'));
                 }
+            });
+        }
 
             </script>
 
@@ -203,16 +203,8 @@
                                             .text('Error calling web service.  Please try again later.'));
                         }
                     });
-                    
-                    
-
-
 
                 }
-
-
-
-
 
             </script>
 
@@ -235,7 +227,7 @@
 
                                 var breakId = beachBreak.id;
                                 var breakName = beachBreak.name;
-                                breakDivs = '<div class ="col-md-3 text-center border border-light">';
+                                breakDivs = '<div class ="col-md-3 text-center border border-light" onclick="navigateToBreak();">';
                                 breakDivs += '<h1>' + breakName + '</h1>';
                                 breakDivs += '<input type="hidden" id =' + breakId + '</>';
                                 breakDivs += '</div>';
@@ -267,7 +259,7 @@
 
                     var allBreaksForBeach = /*[[${allBreaksForBeach}]]*/ 'default';
                     var selectedBeach = /*[[${selectedBeach}]]*/ 'default';
-           
+
                     /*]]>*/
 
 
@@ -281,10 +273,10 @@
                         div += '</div>';
                         $('#breaks').append(div);
                     }
-                    
-                    
+
+
                     $('#beach-name').html("<h3>" + selectedBeach.name + "</h3>");
-                    
+
                     loadWeather(selectedBeach.zipCode);
 
                 }
@@ -320,14 +312,13 @@
                 }
 
             </script>
-            
+
             <script th:inline="javascript">
 
-                function testMessage(){
-                    
-                    
+                function navigateToBreak() {
+
                     alert("The div has been clicked");
-                    
+
                 }
 
             </script>
