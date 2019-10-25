@@ -233,10 +233,9 @@
                                 breakDivs += '<input type="hidden" id =' + breakId + '</>';
                                 breakDivs += '</div>';
                                 
-                                var testLink = '<a href = "break?id=801">' + breakDivs + '</a>';
-                                
-                                
-                                
+                                <!--var testLink = '<a href = "break/' + beachBreak.id + '">' + breakDivs + '</a>';-->
+                                <!--var testLink = '<a href = "break?id=808">' + breakDivs + '</a>'-->
+                                var testLink = '<a href = "break?id=' + beachBreak.id + '">' + breakDivs + '</a>'
                                 
                                 $('#breaks').append(testLink);
                             })

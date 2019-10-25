@@ -32,15 +32,17 @@ public class BreakController {
     UserDao uDao;
     
     @GetMapping("break")
-    public String displayBreak(Model model) throws InvalidIdException {
+    public String displayBreak(HttpServletRequest request, Model model) throws InvalidIdException {
+        
+        int id = Integer.parseInt(request.getParameter("id"));
         
         List<Break> allBreaks = sDao.getAllBreaks();
         model.addAttribute("allBreaks", allBreaks);
         
-        Break selectedBreak = sDao.getBreakById(801);
+        Break selectedBreak = sDao.getBreakById(id);
         model.addAttribute("selectedBreak", selectedBreak);
         
-        List<BreakComment> breakComments = sDao.getAllBreakComments();
+        List<BreakComment> breakComments = sDao.getCommentsByBreak(id);
         model.addAttribute("breakComments", breakComments);
         
         return "break";

@@ -45,11 +45,14 @@
                             <a class="dropdown-item" href="#">
                                 <option th:each="break : ${allBreaks}" 
                                         th:value="${break.id}" 
-                                        th:text="${break.name}"></a>
+                                        th:text="${break.name}"
+                                        th:selected="${selectedBreak.id}==${break.id}"
                             </option>
                         </select>
                     </div>
 
+                    <h1 th:text="${selectedBreak.name}"</h1>
+                    
                     <div>
                         <button type="button" id="goToBreak" class="btn btn-default">Go!</button>
                     </div>
