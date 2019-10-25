@@ -227,11 +227,18 @@
 
                                 var breakId = beachBreak.id;
                                 var breakName = beachBreak.name;
+                                
                                 breakDivs = '<div class ="col-md-3 text-center border border-light" onclick="navigateToBreak();">';
                                 breakDivs += '<h1>' + breakName + '</h1>';
                                 breakDivs += '<input type="hidden" id =' + breakId + '</>';
                                 breakDivs += '</div>';
-                                $('#breaks').append(breakDivs);
+                                
+                                var testLink = '<a href = "break?id=801">' + breakDivs + '</a>';
+                                
+                                
+                                
+                                
+                                $('#breaks').append(testLink);
                             })
 
                         },
@@ -318,6 +325,14 @@
                 function navigateToBreak() {
 
                     alert("The div has been clicked");
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
                 }
 
