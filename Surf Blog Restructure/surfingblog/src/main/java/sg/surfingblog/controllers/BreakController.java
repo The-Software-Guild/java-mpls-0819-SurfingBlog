@@ -50,6 +50,10 @@ public class BreakController {
     public String breakDetail(Integer id, Model model) throws InvalidIdException {
         Break beachBreak = sDao.getBreakById(id);
         model.addAttribute("beachBreak", beachBreak);
+        
+        List<BreakComment> breakComments = sDao.getCommentsByBreak(id);
+        model.addAttribute("breakComments", breakComments);
+        
         return "breakDetail";
     }
 
