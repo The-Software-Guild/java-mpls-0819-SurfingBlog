@@ -85,7 +85,7 @@ beachId int not null,
 Foreign Key fk_beach_comment_beach(beachId)
 references beach(`id`),
 
-comment varchar(1000) not null
+`comment` varchar(1000) not null
 );
 
 insert into `user`(`id`,`username`,`password`,`enabled`)
