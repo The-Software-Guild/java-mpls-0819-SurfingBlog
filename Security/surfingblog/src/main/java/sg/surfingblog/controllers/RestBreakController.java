@@ -52,7 +52,7 @@ public class RestBreakController {
         return toReturn;
     }
     
-    @DeleteMapping("/breakComments/delete/{id}")
+    @PutMapping("/breakComments/delete/{id}")
     public void deleteBreakComment(@PathVariable Integer id) throws InvalidIdException {
         sDao.deleteBreakComment(id);
     }

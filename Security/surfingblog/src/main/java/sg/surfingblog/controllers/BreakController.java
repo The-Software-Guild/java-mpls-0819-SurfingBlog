@@ -8,6 +8,8 @@ package sg.surfingblog.controllers;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,17 +71,16 @@ public class BreakController {
 //    }
 
     @PostMapping("addBreakComment")
-    public String addBeachComment(BreakComment newBreakComment, HttpServletRequest request) throws SurfingDaoException, InvalidIdException {
-
-        String breakId = request.getParameter("breakId");
-        Break breakToAdd = sDao.getBreakById(801);
-        SiteUser testUser = uDao.getUserById(1);
-
-//        Break beachBreak = new Break();
-//        beachBreak.setId(Integer.parseInt(breakId));
+    public String addBreakComment(BreakComment newBreakComment, HttpServletRequest request) throws SurfingDaoException, InvalidIdException {
+        
+        String breakId = request.getParameter("break.id");
+        String userName = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+      
+        Break breakToAdd = sDao.getBreakById(Integer.parseInt(breakId));
+        SiteUser user = uDao.getUserByUsername(userName);
         
         newBreakComment.setBeachBreak(breakToAdd);
-        newBreakComment.setUser(testUser);
+        newBreakComment.setUser(user);
 
         sDao.addBreakComment(newBreakComment);
 

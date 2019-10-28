@@ -107,6 +107,9 @@
         <div class="row m-4">
             <div class="col-7 text-center m-3">
                 <form action="addBreakComment" method="POST">
+                     <input type="hidden" 
+                            th:name="${_csrf.parameterName}" 
+                            th:value="${_csrf.token}"/>
 
                     <div class="form-group row">
                         <label for="commentText" class="col-3 col-form-label">
@@ -115,7 +118,8 @@
 
                         </textarea>
                     </div>
-
+                    <input type ="hidden" name="break.id" id="commentBreakId"/>
+                     
                     <button type="submit" class="btn btn-primary">Add Comment!</button>
                 </form>
             </div>
