@@ -1,52 +1,136 @@
-body {
-  background-color: rgb(32, 71, 145);  
-  font-family: Geneva,Tahoma,Verdana,sans-serif; 
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(100, 218, 237);  
 }
 
-div{
-    border-radius: 15px;
-}
-
-#site-name-header{
-    background-color: blue;
+.btn{
+ 
     color: white;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: cornflowerblue;
+    z-index: auto;
    
-    border-radius: 15px;
-    font-size: 50px;
-    font-family: monaco,Consolas,Lucida Console,monospace;
+}
+form{
+    display: flexbox;
+    text-align: right;
+    margin-right: 100px;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Poppins', sans-serif;
+    color: rgb(240, 240, 240);
+}
+.carousel{
+    display: block;
+    margin-top: 50px;
+    position: absolute;
+    z-index: -1;
+    margin-left: 230px;
+}
+.logo{
+    color: rgb(240, 240, 240);
+    letter-spacing: 4px;
+    font-size: 20px;
+}
+.navLinks{
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+.navLinks li{
+    list-style: none;
+}
+.navLinks a{
+    color: ghostwhite;
+    background-color: cornflowerblue; 
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 13px;
 }
 
-#beach-name{
-    background-color: lightblue;
-    padding: 2% 0;
-    color: #2B25C8;
+.burger{
+    display: none;
+    cursor: pointer;
+}
+.burger div{
+    width: 25px;
+    height: 3px;
+    background-color: ghostwhite;
+    margin: 5px;
 }
 
-#beach-dropdown{
-    background-color: lightblue;
-    color: #2B25C8;
+@media screen and (max-width:1024px){
+    .navLinks{
+        width: 45%;
+    }
+    form{
+        width: 45%;
+    }
+}
+@media screen and (max-width:768px){
+    body{
+        overflow-x: hidden; 
+    }
+    .navLinks{
+        position: absolute;
+            right: 0px;
+            height: 92vh;
+            top: 8vh;
+            background-color: cornflowerblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 40%;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in;
+    }
+    .navLinks li{
+        opacity: 0;
+    }
+    .burger{
+        display: block;
+    }
+    form{
+        width: 40%;
+    }  
 }
 
-#nav-tool{
-     background-color: lightblue;
-    color: #2B25C8;
-
+.nav-active{
+    transform: translateX(0%);
 }
 
-#weather{
-    background-color: rgb(206, 238, 254);
-    color: black;
-    padding: 2% 0;
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translate(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translate(0px);
+    }
+}
+
+#weather {
+    
+    background-color: rgb(100, 237, 188);
     
 }
 
-
-
-
-
-h1 {
-  color: blue;
+#beach-name {
+    
+    font-size: 150%;
+    
 }
-
 
 
