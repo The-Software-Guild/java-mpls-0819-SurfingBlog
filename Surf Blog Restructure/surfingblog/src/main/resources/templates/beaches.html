@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+        <link rel="stylesheet" href="css/Beach.css">
+
+
+        <title>SurfSpot</title>
+    </head>
+    <body onload="loadBeachComments(); loadDefaultValues();">
+
+        <nav>
+            <div class="logo">
+                <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
+            </div>
+
+            <div class="row m-4">
+                <div class="col text-center m-3">
+                    <a href="/home" class="btn btn-outline-primary btn-lg" font color="white">Home</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
+                </div>
+            </div>
+        </nav>
+
+            <div class="row m-4">
+                <div class="col text-center m-3">
+                    <h1>Beaches</h1>
+                    <br>
+
+                    <div th:each="beach : ${allBeaches}">
+
+                        <a href="#" th:href="@{/beachDetails(id=${beach.id})}"><h2><span th:text="${beach.name}"></span></h2></a>
+                        <br>
+                    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+            <br>
+
+
+            <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>

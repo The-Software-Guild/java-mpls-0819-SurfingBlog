@@ -19,47 +19,15 @@
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-            <!--            <ul class="navLinks">
-                            <li>
-                                <a href="#">Home</a>
-                            </li>
-                            <li>
-                                <a href="#">Beaches</a>
-                            </li>
-                            <li>
-                                <a href="#">Create profile</a>
-                            </li>
-                            <li>
-                                <a href="#">Contact</a>
-                            </li>
-            
-                        </ul>
-                        <div class="burger">
-                            <div class="line1"></div>
-                            <div class="line2"></div>
-                            <div class="line3"></div>
-            
-                        </div>-->
 
             <div class="row m-4">
                 <div class="col text-center m-3">
                     <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
+                    <a href="/beaches" class="btn btn-outline-primary btn-lg">Beaches</a>
                 </div>
             </div>
-            <div class ="col-md-3 text-center" id="beach-dropdown" >
-                <div class="col-9">
-                    <select id="beach" name="beachId" class="form-control" >
-                        <a class="dropdown-item" href="#">
-                            <option th:each="beach : ${allBeaches}" 
-                                    th:value="${beach.id}" 
-                                    th:text="${beach.name}"></a>
-                        </option>
-
-                    </select>
-                </div>
 
                 <p id = "beachId"></p>
             </div>
