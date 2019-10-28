@@ -2,52 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
 
-        <style>
-            .surf {
-                background-color: skyblue;
-                color: white;
-                margin: 20px;
-                padding: 20px;
-            }
-        </style>
+        <!--        <style>
+                    .surf {
+                        background-color: skyblue;
+                        color: white;
+                        margin: 20px;
+                        padding: 20px;
+                    }
+                </style>-->
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link type="text/css"rel="stylesheet" href="css/break.css"/>
 
         <title>SurfSpot</title>
     </head>
     <body>
         <!-- Main Body of Page -->
-
+        <nav>
+            <div class="logo">
+                <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
+            </div>
+            <div class="row m-4">
+                <div class="col text-center m-3">
+                    <a href="/home" class="btn btn-outline-primary btn-lg button">Home</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/beach" class="btn btn-outline-primary btn-lg button">Beaches</a>
+                </div>
+            </div>
+        </nav>
 
 
         <div class="container ">
-            <div class="row m-4">
-                <div class="col text-center border border-dark surf">
-                    <h1><a href="" class="text-dark">Beach Breaks</a></h1>
-                </div>
-            </div>
-            <div class="row m-4 border border-dark">
-                <div class="col text-center m-3">
-                    <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
-                </div>
-                <div class="col text-center m-3">
-                    <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
-                </div>
-                <div class="col text-center m-3">
-                    <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
-                </div>
-            </div>
-
-
-
+            <!--            <div class="row m-4">
+                            <div class="col text-center border border-dark surf">
+                                <h1><a href="" class="text-dark">Beach Breaks</a></h1>
+                            </div>
+                        </div>
+                        <div class="row m-4 border border-dark">
+                            <div class="col text-center m-3">
+                                <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
+                            </div>
+                            <div class="col text-center m-3">
+                                <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
+                            </div>
+                            <div class="col text-center m-3">
+                                <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
+                            </div>
+                        </div>-->
 
 
             <div class = "row" >
-                <div class ="col-md-4 text-center border border-light" id="break-dropdown">
+                <div class ="col-md-4 text-center" id="break-dropdown">
                     <div class="col-9">
                         <select id="break" name="breakId" class="form-control" >
                             <a class="dropdown-item" href="#">
@@ -59,11 +69,11 @@
                     </select>
                 </div>
 
-            
+
 
             </div>
 
-            <div class ="col-md-8 text-center border border-light" >
+            <div class ="col-md-8 text-center" >
                 <p id="breakName" th:text="${selectedBreak.name}"></p>
             </div>
         </div>
@@ -95,6 +105,26 @@
             <p id="blogText" class="text-center" th:text="${selectedBreak.blog}"></p>
         </div>
 
+
+        <div class="row m-4 border border-dark">
+            <div class="col-3 text-center m-3">
+                <span class="h3">Add Comment</span>
+            </div>
+            <div class="col-7 text-center m-3">
+                <form action="addBreakComment" method="POST">
+                    <div class="form-group row">
+                        <label for="breakComment" class="col-3 col-form-label">
+                            Comment</label>
+                        <div class="col-9">
+                            <input type="text" name="breakComment" 
+                                   id="breakComment" class="form-control"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Break Comment</button>
+                </form>
+            </div>
+        </div>    
+
         <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
                 <table class="table table-striped">
@@ -107,8 +137,8 @@
                     </thead>
                     <tbody>
                         <tr th:each="breakComment : ${breakComments}" id="break-user-commentRow">
-                            <td id="id"></td>
-                            <td id="userName"></td>
+                            <td id="userId" th:text="${breakComment.id}"></td>
+                            <td id="userName" th:text="${breakComment.user.username}"></td>
                             <td id="break-user-comments" 
                                 th:text="${breakComment.commentText}"></td>
                         <tr></tr>
@@ -118,19 +148,8 @@
             </div>  
         </div> 
 
-    </div>   
 
-    <!--            <div class = "row">
-                    <h2>Break Comments</h2>
-                    <h4 class="col-md-1">Id</h4>
-                    <h4 class="col-md-3">User</h4>
-                    <h4 class="col-md-8">Comment</h4>
-                    
-                    <div id="break-user-comments">
-                        append break comments here
-                    </div>
-                    
-                </div>-->
+    </div>   
 
 
     <!-- End main body -->
@@ -146,3 +165,5 @@
     <script src="/break.js"></script>
 </body>
 </html>
+
+
