@@ -52,15 +52,10 @@ function getBreakComments(breakId) {
                 
 
                 var div = '<div class ="row-md-12 text-center border border-light>';
-                div += '<div class ="col-md-3">'
-                div += breakCommentUser
-                div += '</div>'
                 div += '<div class ="col-md-9">'
                 div += breakCommentText
                 div += '</div>'
-                div += '<div>'
                 div += '<button type="button" onclick ="deleteBreakComment(' + breakCommentId + ')" class="btn btn-default">Delete</button>'
-                div += '</div>'
                 div += '</div>';
 
                 $('#break-user-comments').append(div);
@@ -106,3 +101,7 @@ function getAllBreaks() {
         }
     })
 }
+//
+//                div += '<div class ="col-md-3">'
+//                div += breakCommentUser
+//                div += '</div>'
