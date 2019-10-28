@@ -13,7 +13,7 @@
 
         <title>SurfSpot</title>
     </head>
-    <body onload="loadBeachComments(); loadDefaultValues();">
+    <body onload= "loadDefaultValues();">
 
         <nav>
             <div class="logo">
@@ -35,14 +35,8 @@
 
             <br>
 
-            <div>
-
-                
-                <div "text-align: center" id ="beach-name">
-                    <h1><span th:text="${selectedBeach.name}"></span></h1>
-                </div>
-
-            </div>
+            <h1><span th:text="${selectedBeach.name}"></span></h1>
+            
 
             <br>
 
@@ -55,14 +49,14 @@
             </div>
 
             <br>
-
-            <div class ="row" id = "breaks">
+            
+            
+            <div class ="row" id = "breaks2">
                 
-                <div th:each="break : ${allBreaksForBeach}">
+                <div th:each="break : ${allBreaksForBeach}" class = "col-4 text-center">
 
-                        <!--<a href="#" th:href="@{/break(id=${break.id})}"><h2><span th:text="${break.name}"></span></h2></a>-->
-                        <div>Test</div>
-                        <br>
+                        <a href="#" th:href="@{/break(id=${break.id})}"><h3><span th:text="${break.name}"></span></h3></a>
+                        
                     </div> 
 
             </div>
@@ -73,7 +67,7 @@
                 <div class ="col-md-1"></div>
                 <div class ="col-md-10 text-center border border-light" id = "beach-user-comments">
 
-                    <h1>User Comments</h1>
+                    <h3>User Comments</h3>
 
                     <div class="row m-4 border border-dark">
                         <div class="col text-center m-3">
