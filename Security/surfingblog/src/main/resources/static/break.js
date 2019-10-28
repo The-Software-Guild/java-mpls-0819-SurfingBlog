@@ -45,19 +45,33 @@ function getBreakComments(breakId) {
                 var breakCommentId = beachComment.id;
                 var breakCommentUser = beachComment.user.username;
                 var breakCommentText = beachComment.commentText;
-                
+
 //                $('#id').val(breakCommentId);
 //                $('#userName').val(breakCommentUser);
 //                $('#break-user-comments').val(breakCommentText);
-                
 
-                var div = '<div class ="row-md-12 text-center border border-light>';
+
+                var div = '<div class ="row-md-12 border>';
                 div += '<div class ="col-md-9">'
                 div += breakCommentText
-                div += '</div>'
                 div += '<button type="button" onclick ="deleteBreakComment(' + breakCommentId + ')" class="btn btn-default">Delete</button>'
+                div += '</div>'
                 div += '</div>';
 
+                var div2 = '<div class ="row-md-12 text-center border>';
+                div2 += '<div class ="col-md-9">'
+                div2 += breakCommentUser
+                div2 += '</div>'
+                div2 += '</div>';
+
+                var div3 = '<div class ="row-md-12 text-center border>';
+                div3 += '<div class ="col-md-9">'
+                div3 += breakCommentId
+                div3 += '</div>'
+                div3 += '</div>';
+                
+                $('#userId').append(div3);
+                $('#userName').append(div2);
                 $('#break-user-comments').append(div);
             });
         },
@@ -69,12 +83,14 @@ function getBreakComments(breakId) {
 
 function emptyBreakComments() {
     $('#break-user-comments').empty();
+    $('#userName').empty();
+    $('#userId').empty();
 }
 
 function deleteBreakComment(breakCommentId) {
 
     $.ajax({
-        method: "POST",
+        method: "DELETE",
         url: 'http://localhost:8080/breakComments/delete/' + breakCommentId,
         success: function (data, status) {
             alert('success');
