@@ -25,6 +25,9 @@
                 <div class="col text-center m-3">
                     <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
                 </div>
+                <div class="col text-center m-3">
+                    <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
+                </div>
             </div>
             <div class ="col-md-3 text-center" id="beach-dropdown" >
                 <div class="col-9">
@@ -49,6 +52,11 @@
                 <span th:text="${beachBreak.id}">display id</span>
             </div>
 
+            <div class="col-6 text-right"><strong>Beach</strong></div>
+            <div class="col-6 text-left">
+                <span th:text="${beachBreak.beach.name}">display beach</span>
+            </div>
+
             <div class="col-6 text-right"><strong>Name</strong></div>
             <div class="col-6 text-left">
                 <span th:text="${beachBreak.name}">display name</span>
@@ -58,47 +66,41 @@
             <div class="col-6 text-left">
                 <span th:text="${beachBreak.latitude}">display latitude</span>
             </div>
-          
+
             <div class="col-6 text-right"><strong>Longitude</strong></div>
             <div class="col-6 text-left">
                 <span th:text="${beachBreak.longitude}">display longitude</span>
             </div>
-            
+
             <div class="col-6 text-right"><strong>Blog</strong></div>
             <div class="col-6 text-left">
                 <span th:text="${beachBreak.blog}">display blog</span>
             </div> 
-            
-        </div>
-        
-        <div>
-            <p th:text=${break.blog}">
 
-            </p>
-            
         </div>
-        
-        
+
+
+
         <div class="row m-4 border border-dark">
-                <div class="col-3 text-center m-3">
-                    <span class="h3">Add Break Comment</span>
-                </div>
-                <div class="col-7 text-center m-3">
-                    <form action="addBreakComment" method="POST">
-                        <div class="form-group row">
-                            <label for="commentText" class="col-3 col-form-label">
-                                CommentText</label>
-                            <div class="col-9">
-                                <input type="text" name="commentText" 
-                                       id="commentText" class="form-control"/>
-                            </div>
-                        </div>
-                     
-                        <button type="submit" class="btn btn-primary">Add Break Comment</button>
-                    </form>
-                </div>
+            <div class="col-3 text-center m-3">
+                <span class="h3">Add Break Comment</span>
             </div>
-        
+            <div class="col-7 text-center m-3">
+                <form action="addBreakComment" method="POST">
+                    <div class="form-group row">
+                        <label for="commentText" class="col-3 col-form-label">
+                            CommentText</label>
+                        <div class="col-9">
+                            <input type="text" name="commentText" 
+                                   id="commentText" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Break Comment</button>
+                </form>
+            </div>
+        </div>
+
         <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
                 <table class="table table-striped">
@@ -107,16 +109,14 @@
                             <th>ID</th>
                             <th>User</th>
                             <th>Comment</th>
-                            <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="breakComment : ${allBreakComments}">
+                        <tr th:each="breakComment : ${breakComments}">
                             <td th:text="${breakComment.id}">Comment ID</td>
-                            <td th:text="${breakComment.name}">User</td>
+                            <td th:text="${breakComment.user.username}">User</td>
                             <td th:text="${breakComment.commentText}">Comment</td>
-                            <td><a href="#" th:href="@{/editBreakComment(id=${breakComment.id})}">Edit</a></td>
                             <td><a href="#" th:href="@{/deleteBreakComment(id=${breakComment.id})}">Delete</a></td>
                     </tbody>
                 </table>
