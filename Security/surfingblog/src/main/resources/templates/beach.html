@@ -14,22 +14,30 @@
         <title>SurfSpot</title>
     </head>
     <body onload="loadBeachComments(); loadDefaultValues();">
-
-        <div class ="container">
-
-            <div class ="row">
-                <div class ="col-md-10 text-center border border-light" id ="site-name-header">THE SURF SPOT</div>
-                <div class ="col-md-1"></div>
-                <div class ="col-md-1 text-center border border-light" id = "nav-tool"><h3>Nav Tool</h3></div>
-                Username:&nbsp;<span th:text="${#authentication.getPrincipal().getUsername()}" id = "username"></span>
-
+        
+        <nav>
+            <div class="logo">
+                <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
 
+            <div class="row m-4">
+                <div class="col text-center m-3">
+                    <a href="/home" class="btn btn-outline-primary btn-lg" font color="white">Home</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
+                </div>
+            </div>
+        </nav>
+        
+
+        <div class ="container">
+            
             <br>
 
             <div class = "row">
 
-                <div class ="col-md-3 text-center border border-light" id="beach-dropdown">
+                <div class ="col-md-3 text-center" id="beach-dropdown" >
                     <div class="col-9">
                         <select id="beach" name="beachId" class="form-control" >
                             <a class="dropdown-item" href="#">
@@ -41,23 +49,14 @@
                         </select>
                     </div>
 
-                    <!--<p id = "beachLink"><a href="#" th:href="@{/beach(id=${beach.id})}">Go!</a></p>-->
-
-                    <!--This works: alert($('#beach-dropdown').find('option:selected').val());-->
-
-                    <!--This kinda works: <p id = "beachLink"><a href="#" th:href="@{/beach(id=IDVALUE)}">Go!</a></p>-->
-                    <!--This works: <p id = "beachLink"><a href="#" th:href="@{/beach(id=301)}">Go!</a></p>-->
-                    <!--<a href="#" th:href="@{/beach(id=${beach.id})}">Go!</a>-->
                     <p id = "beachId"></p>
                 </div>
 
 
 
                 <div class ="col-md-1"></div>
-                <div class ="col-md-8 text-center border border-light" id ="beach-name">
+                <div class ="col-md-8 text-center" id ="beach-name">
 
-                    <!--<input type="text" name="selectedBeach" id="selectedBeach" 
-                               class="form-control" th:value="${selectedBeach.name}"/>-->
 
                 </div>
 
@@ -67,7 +66,7 @@
 
             <div class ="row">
                 <div class ="col-md-1"></div>
-                <div class ="col-md-10 text-center border border-light" id = "weather">
+                <div class ="col-md-10 text-center" id = "weather">
                     <h1>Current Weather</h1>
                 </div>
                 <div class ="col-md-1"></div>
@@ -92,6 +91,9 @@
                     <div class="row m-4">
                         <div class="col-7 text-center m-3">
                             <form action="addBeachComment" method="POST">
+                                                    <input type="hidden" 
+                            th:name="${_csrf.parameterName}" 
+                            th:value="${_csrf.token}"/>
 
                                 <div class="form-group row">
                                     <label for="commentText" class="col-3 col-form-label">
@@ -100,6 +102,8 @@
 
                                     </textarea>
                                 </div>
+                                 <input type ="hidden" name="beach.id" id="commentBeachId"/>
+                                 <input type ="hidden" name="user.id" id="commentUserId"/>
 
                                 <button type="submit" class="btn btn-primary">Add Comment!</button>
                             </form>
@@ -123,15 +127,11 @@
                     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
 
-            <!--<script type="text/javascript" src="Beach.js"></script>-->
-
-
-
             <script th:inline="javascript">
 
         function loadWeather(beachZip) {
 
-            $('#weather').html("");
+            $('#weather').html("<h3>Current Weather</h3>");
 
             $.ajax({
                 type: 'GET',
@@ -192,7 +192,7 @@
                         url: url,
                         success: function (data, status) {
 
-                            $('#beach-name').html("<h3>" + data.name + "</h3>");
+                            $('#beach-name').html("<h1>" + data.name + "</h1>");
                             loadWeather(data.zipCode);
 
                         },
@@ -228,16 +228,19 @@
                                 var breakId = beachBreak.id;
                                 var breakName = beachBreak.name;
                                 
-                                breakDivs = '<div class ="col-md-3 text-center border border-light" onclick="navigateToBreak();">';
-                                breakDivs += '<h1>' + breakName + '</h1>';
+                                breakDivs = '<div class ="col-md-9 text-center">';
+                                breakDivs += '<h3>' + breakName + '</h3>';
                                 breakDivs += '<input type="hidden" id =' + breakId + '</>';
                                 breakDivs += '</div>';
-                                
-                                <!--var testLink = '<a href = "break/' + beachBreak.id + '">' + breakDivs + '</a>';-->
-                                <!--var testLink = '<a href = "break?id=808">' + breakDivs + '</a>'-->
+                                       
                                 var testLink = '<a href = "break?id=' + beachBreak.id + '">' + breakDivs + '</a>'
                                 
                                 $('#breaks').append(testLink);
+                                
+                                $('#commentBeachId').val(beachId);
+                                $('#commentUserId').val(1);
+                                
+                                
                             })
 
                         },
@@ -268,18 +271,21 @@
 
                     /*]]>*/
 
-
+                    $('#breaks').html("");
                     for (var i = 0; i < allBreaksForBeach.length; i++) {
 
                         var breakId = allBreaksForBeach[i].id;
                         var breakName = allBreaksForBeach[i].name;
-                        var div = '<div class ="col-md-3 text-center border border-light">';
-                        div += '<h1>' + breakName + '</h1>';
+                        
+                        var div = '<div class ="col-md-9 col-centered">';
+                        div += '<h3>' + breakName + '</h3>';
                         div += '<input type="hidden" id =' + breakId + '</>';
                         div += '</div>';
-                        $('#breaks').append(div);
+                        
+                        var testLink = '<a href = "break?id=' + breakId + '">' + div + '</a>'
+                        
+                        $('#breaks').append(testLink);
                     }
-
 
                     $('#beach-name').html("<h3>" + selectedBeach.name + "</h3>");
 
@@ -318,22 +324,6 @@
                 }
 
             </script>
-
-            <script th:inline="javascript">
-
-                function navigateToBreak() {
-
-                    alert("The div has been clicked");
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-
-                }
 
             </script>
 

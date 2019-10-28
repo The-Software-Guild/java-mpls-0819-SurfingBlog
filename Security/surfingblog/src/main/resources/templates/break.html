@@ -67,13 +67,9 @@
                                         th:selected="${selectedBreak.id}==${break.id}">
                                 <input type="hidden" name="breakId" id="breakId" th:value="${break.id}"/>
                             </option>
-                            
-                    </select>
+                        </select>
+                    </div>
                 </div>
-
-
-
-            </div>
 
             <div class ="col-md-8 text-center" >
                 <p id="breakName" th:text="${selectedBreak.name}"></p>
