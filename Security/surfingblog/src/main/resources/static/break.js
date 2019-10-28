@@ -1,10 +1,6 @@
 
 $('#break-dropdown').on('change', function () {
-    var breakId = $('#break-dropdown').find('option:selected').val();
-    getBreakById(breakId);
-    emptyBreakComments();
-    getBreakComments(breakId);
-
+    refreshBreak();
 });
 
 function getBreakById(breakId) {
@@ -69,7 +65,7 @@ function getBreakComments(breakId) {
                 div3 += breakCommentId
                 div3 += '</div>'
                 div3 += '</div>';
-                
+
                 $('#userId').append(div3);
                 $('#userName').append(div2);
                 $('#break-user-comments').append(div);
@@ -94,12 +90,20 @@ function deleteBreakComment(breakCommentId) {
         url: 'http://localhost:8080/breakComments/delete/' + breakCommentId,
         success: function (data, status) {
             alert('success');
+            refreshBreak();
         },
         error: function (jqXHR, status, thrownError) {
             alert('failure');
         }
 
     })
+}
+
+function refreshBreak() {
+    var breakId = $('#break-dropdown').find('option:selected').val();
+    getBreakById(breakId);
+    emptyBreakComments();
+    getBreakComments(breakId);
 }
 
 function getAllBreaks() {
