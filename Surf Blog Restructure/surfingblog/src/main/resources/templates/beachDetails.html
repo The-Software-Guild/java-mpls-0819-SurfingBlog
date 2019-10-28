@@ -27,6 +27,9 @@
                 <div class="col text-center m-3">
                     <a href="/beaches" class="btn btn-outline-primary btn-lg">Beaches</a>
                 </div>
+                <div class="col text-center m-3">
+                    <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
+                </div>
             </div>
         </nav>
 
@@ -55,7 +58,7 @@
                 
                 <div th:each="break : ${allBreaksForBeach}" class = "col-4 text-center">
 
-                        <a href="#" th:href="@{/break(id=${break.id})}"><h3><span th:text="${break.name}"></span></h3></a>
+                    <a href="#" th:href="@{/break(id=${break.id})}"><h3>Go to...<br><span th:text="${break.name}"></span></h3></a>
                         
                     </div> 
 
@@ -63,61 +66,50 @@
 
             <br>
 
-            <div class ="row">
-                <div class ="col-md-1"></div>
-                <div class ="col-md-10 text-center border border-light" id = "beach-user-comments">
-
-                    <h3>User Comments</h3>
-
-                    <div class="row m-4 border border-dark">
-                        <div class="col text-center m-3">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>User</th>
-                                        <th>Comments</th>
-                                    </tr>     
-                                </thead>
-                                <tbody>
-                                    <tr th:each="beachComment : ${beachComments}" id="break-user-commentRow">
-                                        <td id="userId" th:text="${beachComment.id}"></td>
-                                        <td id="userName" th:text="${beachComment.user.username}"></td>
-                                        <td id="break-user-comments" 
-                                            th:text="${beachComment.commentText}"></td>
-                                    <tr></tr>
-                                    </tr>                    
-                                </tbody>                     
-                            </table>
-                        </div>  
-                    </div> 
-
-
-                    <div class="row m-4">
-                        <div class="col-7 text-center m-3">
-                            <form action="addBeachComment" method="POST">
-                                <input type="hidden" 
+            <div class="row m-4 border border-dark">
+            <div class="col-3 text-center m-3">
+                <span class="h3">Thoughts about <span th:text="${selectedBeach.name}"></span>? <br><br>Add a comment!</span>
+            </div>
+            <div class="col-7 text-center m-3">
+                <form action="addBeachComment" method="POST">
+                    <input type="hidden" 
                                        th:name="${_csrf.parameterName}" 
                                        th:value="${_csrf.token}"/>
+                    
+                    <input type="hidden" name="id" th:value="${selectedBeach.id}"/>
+                    <div class="form-group row">
+    
+                        <textarea class ="form-control" name ="commentText" id="commentText" rows="5">
 
-                                <div class="form-group row">
-                                    <label for="commentText" class="col-3 col-form-label">
-                                        Comment</label>
-                                    <textarea class ="form-control" name ="commentText" id="commentText" rows="3">
-
-                                    </textarea>
-                                </div>
-                                <input type ="hidden" name="beach.id" id="commentBeachId"/>
-                                <input type ="hidden" name="user.id" id="commentUserId"/>
-
-                                <button type="submit" class="btn btn-primary">Add Comment!</button>
-                            </form>
-                        </div>
+                        </textarea>
                     </div>
 
-                </div>
-                <div class ="col-md-1"></div>
+                    <button type="submit" class="btn btn-primary">Add Beach Comment</button>
+                </form>
             </div>
+        </div>
+
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Comment</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="beachComment : ${beachComments}">
+                            <td th:text="${beachComment.id}">Comment ID</td>
+                            <td th:text="${beachComment.user.username}">User</td>
+                            <td th:text="${beachComment.commentText}">Comment</td>
+                            <td><a href="#" th:href="@{/deleteBeachComment(id=${beachComment.id})}">Delete</a></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
             <br>
 
@@ -183,88 +175,6 @@
 
             </script>
 
-
-            <script th:inline="javascript">
-
-                function updateBeachName() {
-
-                var beachId = $('#beach-dropdown').find('option:selected').val();
-
-                var url = 'http://localhost:8080/beach/' + beachId;
-
-                $.ajax({
-                type: 'GET',
-                url: url,
-                success: function (data, status) {
-
-                $('#beach-name').html("<h1>" + data.name + "</h1>");
-                loadWeather(data.zipCode);
-
-                },
-                error: function () {
-                $('#errorMessages')
-                .append($('<li>')
-                .attr({class: 'list-group-item list-group-item-danger'})
-                .text('Error calling web service.  Please try again later.'));
-                }
-                });
-
-                }
-
-            </script>
-
-
-            <script th:inline="javascript">
-
-                function updateBreaks() {
-
-                var beachId = $('#beach-dropdown').find('option:selected').val();
-
-                var url = 'http://localhost:8080/beach/beachBreaks/' + beachId;
-
-                $.ajax({
-                type: 'GET',
-                url: url,
-                success: function (breakArray) {
-
-                $('#breaks').html("");
-                $.each(breakArray, function (index, beachBreak) {
-
-                var breakId = beachBreak.id;
-                var breakName = beachBreak.name;
-
-                breakDivs = '<div class ="col-md-9 text-center">';
-                breakDivs += '<h3>' + breakName + '</h3>';
-                breakDivs += '<input type="hidden" id =' + breakId + '</>';
-                breakDivs += '</div>';
-
-                var testLink = '<a href = "break?id=' + beachBreak.id + '">' + breakDivs + '</a>'
-
-                $('#breaks').append(testLink);
-
-                $('#commentBeachId').val(beachId);
-                $('#commentUserId').val(1);
-
-
-                })
-
-                },
-
-                error: function () {
-                $('#errorMessages')
-                .append($('<li>')
-                .attr({class: 'list-group-item list-group-item-danger'})
-                .text('Error calling web service.  Please try again later.'));
-                }
-
-                });
-
-                }
-
-
-
-            </script>
-
             <script th:inline="javascript">
 
                 function loadDefaultValues() {
@@ -300,35 +210,7 @@
 
             </script>
 
-            <script th:inline="javascript">
-
-                function loadBeachComments() {
-
-                /*<![CDATA[*/
-
-                var beachComments = /*[[${beachComments}]]*/ 'default';
-                /*]]>*/
-
-
-                for (var i = 0; i < beachComments.length; i++) {
-
-                var beachCommentId = beachComments[i].id;
-                var beachCommentText = beachComments[i].commentText;
-                var beachCommentUser = beachComments[i].user.username;
-                var div = '<div class ="row-md-3 text-center border border-light">';
-                div += '<div class ="col-md-2">'
-                div += beachCommentUser
-                div += '</div>'
-                div += '<div class ="col-md-9">'
-                div += beachCommentText
-                div += '</div>'
-                div += '</div>';
-                $('#beach-user-comments').append(div);
-                }
-
-                }
-
-            </script>
+            
 
         </script>
 
