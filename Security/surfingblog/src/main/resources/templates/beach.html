@@ -91,6 +91,9 @@
                     <div class="row m-4">
                         <div class="col-7 text-center m-3">
                             <form action="addBeachComment" method="POST">
+                                                    <input type="hidden" 
+                            th:name="${_csrf.parameterName}" 
+                            th:value="${_csrf.token}"/>
 
                                 <div class="form-group row">
                                     <label for="commentText" class="col-3 col-form-label">
@@ -99,6 +102,8 @@
 
                                     </textarea>
                                 </div>
+                                 <input type ="hidden" name="beach.id" id="commentBeachId"/>
+                                 <input type ="hidden" name="user.id" id="commentUserId"/>
 
                                 <button type="submit" class="btn btn-primary">Add Comment!</button>
                             </form>
@@ -231,6 +236,11 @@
                                 var testLink = '<a href = "break?id=' + beachBreak.id + '">' + breakDivs + '</a>'
                                 
                                 $('#breaks').append(testLink);
+                                
+                                $('#commentBeachId').val(beachId);
+                                $('#commentUserId').val(1);
+                                
+                                
                             })
 
                         },
