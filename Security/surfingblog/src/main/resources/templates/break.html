@@ -64,8 +64,10 @@
                                 <option th:each="break : ${allBreaks}" 
                                         th:value="${break.id}" 
                                         th:text="${break.name}"
-                                        th:selected="${selectedBreak.id}==${break.id}"
+                                        th:selected="${selectedBreak.id}==${break.id}">
+                                <input type="hidden" name="breakId" id="breakId" th:value="${break.id}"/>
                             </option>
+                            
                     </select>
                 </div>
 
@@ -106,24 +108,22 @@
         </div>
 
 
-        <div class="row m-4 border border-dark">
-            <div class="col-3 text-center m-3">
-                <span class="h3">Add Comment</span>
-            </div>
+        <div class="row m-4">
             <div class="col-7 text-center m-3">
                 <form action="addBreakComment" method="POST">
+
                     <div class="form-group row">
-                        <label for="breakComment" class="col-3 col-form-label">
+                        <label for="commentText" class="col-3 col-form-label">
                             Comment</label>
-                        <div class="col-9">
-                            <input type="text" name="breakComment" 
-                                   id="breakComment" class="form-control"/>
-                        </div>
+                        <textarea class ="form-control" name ="commentText" id="commentText" rows="3">
+
+                        </textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Break Comment</button>
+
+                    <button type="submit" class="btn btn-primary">Add Comment!</button>
                 </form>
             </div>
-        </div>    
+        </div>
 
         <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
