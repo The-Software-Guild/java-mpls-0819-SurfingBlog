@@ -69,6 +69,7 @@ function getBreakComments(breakId) {
                 $('#userId').append(div3);
                 $('#userName').append(div2);
                 $('#break-user-comments').append(div);
+                
             });
         },
         error: function (jqXHR, status, thrownError) {
@@ -86,9 +87,9 @@ function emptyBreakComments() {
 function deleteBreakComment(breakCommentId) {
 
     $.ajax({
-        method: "DELETE",
+        method: "PUT",
         url: 'http://localhost:8080/breakComments/delete/' + breakCommentId,
-        success: function (data, status) {
+        success: function (response) {
             alert('success');
             refreshBreak();
         },
@@ -104,6 +105,7 @@ function refreshBreak() {
     getBreakById(breakId);
     emptyBreakComments();
     getBreakComments(breakId);
+    $('#commentBreakId').val(breakId);
 }
 
 function getAllBreaks() {

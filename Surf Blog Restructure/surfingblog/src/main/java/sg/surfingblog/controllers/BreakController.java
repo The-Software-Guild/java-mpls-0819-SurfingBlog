@@ -24,30 +24,33 @@ import sg.surfingblog.newpackage.models.BreakComment;
  */
 @Controller
 public class BreakController {
-    
+
     @Autowired
     SurfingDao sDao;
-    
+
     @Autowired
     UserDao uDao;
-    
+
     @GetMapping("break")
-    public String displayBreak(HttpServletRequest request, Model model) throws InvalidIdException {
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-        
+    public String displayBreak(Model model) throws InvalidIdException {
+
+//        int id = Integer.parseInt(request.getParameter("id"));
         List<Break> allBreaks = sDao.getAllBreaks();
         model.addAttribute("allBreaks", allBreaks);
-        
-        Break selectedBreak = sDao.getBreakById(id);
-        model.addAttribute("selectedBreak", selectedBreak);
-        
-        List<BreakComment> breakComments = sDao.getCommentsByBreak(id);
-        model.addAttribute("breakComments", breakComments);
-        
+
+//        Break selectedBreak = sDao.getBreakById(id);
+//        model.addAttribute("selectedBreak", selectedBreak);
+//        
+//        List<BreakComment> breakComments = sDao.getCommentsByBreak(id);
+//        model.addAttribute("breakComments", breakComments);
         return "break";
     }
-    
- 
-    
+
+    @GetMapping("breakDetail")
+    public String breakDetail(Integer id, Model model) throws InvalidIdException {
+        Break beachBreak = sDao.getBreakById(id);
+        model.addAttribute("beachBreak", beachBreak);
+        return "breakDetail";
+    }
+
 }

@@ -1,15 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-
-        <!--        <style>
-                    .surf {
-                        background-color: skyblue;
-                        color: white;
-                        margin: 20px;
-                        padding: 20px;
-                    }
-                </style>-->
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,59 +17,65 @@
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
+
             <div class="row m-4">
                 <div class="col text-center m-3">
-                    <a href="/home" class="btn btn-outline-primary btn-lg button">Home</a>
+                    <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="/beach" class="btn btn-outline-primary btn-lg button">Beaches</a>
+                    <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
                 </div>
+            </div>
+            <div class ="col-md-3 text-center" id="beach-dropdown" >
+                <div class="col-9">
+                    <select id="beach" name="beachId" class="form-control" >
+                        <a class="dropdown-item" href="#">
+                            <option th:each="beach : ${allBeaches}" 
+                                    th:value="${beach.id}" 
+                                    th:text="${beach.name}"></a>
+                        </option>
+
+                    </select>
+                </div>
+
+                <p id = "beachId"></p>
             </div>
         </nav>
 
 
-        <div class="container ">
-            <!--            <div class="row m-4">
-                            <div class="col text-center border border-dark surf">
-                                <h1><a href="" class="text-dark">Beach Breaks</a></h1>
-                            </div>
-                        </div>
-                        <div class="row m-4 border border-dark">
-                            <div class="col text-center m-3">
-                                <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
-                            </div>
-                            <div class="col text-center m-3">
-                                <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
-                            </div>
-                            <div class="col text-center m-3">
-                                <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
-                            </div>
-                        </div>-->
-
-
-            <div class = "row" >
-                <div class ="col-md-4 text-center" id="break-dropdown">
-                    <div class="col-9">
-                        <select id="break" name="breakId" class="form-control" >
-                            <a class="dropdown-item" href="#">
-                                <option th:each="break : ${allBreaks}" 
-                                        th:value="${break.id}" 
-                                        th:text="${break.name}"
-                                        th:selected="${selectedBreak.id}==${break.id}"
-
-
-                                </option>
-                        </select>
-                    </div>
-
-            </div>
-
-            <div class ="col-md-8 text-center" >
-                <p id="breakName" th:text="${selectedBreak.name}"></p>
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+<!--                            <th>Beach</th>-->
+<!--                            <th>Latitude</th>
+                            <th>Longitude</th>-->
+                            <th>Details</th>
+<!--                            <th>Edit</th>
+                            <th>Delete</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="break : ${allBreaks}">
+                            <td th:text="${break.id}">Break ID</td>
+                            <td th:text="${break.name}">Break Name</td>
+<!--                            <td th:text="${break.beach.name}">Beach Name</td>-->
+<!--                            <td th:text="${break.latitude}">Latitude</td>
+                            <td th:text="${break.longitude}">Longitude</td>-->
+                            <td><a href="#" th:href="@{/breakDetail(id=${break.id})}">Details</a></td>
+                            <!--                            <td><a href="#" th:href="@{/editBreak(id=${break.id})}">Edit</a></td>
+                                                        <td><a href="#" th:href="@{/deleteBreakid=${break.id})}">Delete</a></td>-->
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="row m-4 border border-dark">
+
+<!--        <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
                 <table class="table table-striped">
                     <thead>
@@ -95,10 +92,10 @@
                     </tbody>                     
                 </table>
             </div>    
-            <!--             
+                         
                <div class="col-md-4"></div> 
                             <div class="col-md-4" id="latitude"></div> 
-                            <div class="col-md-4" id="longitude"></div> -->
+                            <div class="col-md-4" id="longitude"></div> 
         </div>
 
         <div>
@@ -146,7 +143,7 @@
                     </tbody>                     
                 </table>
             </div>  
-        </div> 
+        </div> -->
 
 
     </div>   
@@ -165,5 +162,6 @@
     <script src="/break.js"></script>
 </body>
 </html>
+
 
 
