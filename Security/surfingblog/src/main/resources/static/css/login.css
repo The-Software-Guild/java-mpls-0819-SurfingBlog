@@ -17,19 +17,13 @@ nav{
 }
 form{
     display: flexbox;
-    text-align: right;
-    margin-right: 100px;
+    text-align: left;
+    margin-left: 100px;
     -webkit-font-smoothing: antialiased;
     font-family: 'Poppins', sans-serif;
     color: rgb(240, 240, 240);
 }
-.carousel{
-    display: block;
-    margin-top: 50px;
-    position: absolute;
-    z-index: -1;
-    margin-left: 230px;
-}
+
 .logo{
     color: rgb(240, 240, 240);
     letter-spacing: 4px;
@@ -38,7 +32,7 @@ form{
 .navLinks{
     display: flex;
     justify-content: space-around;
-    width: 30%;
+    width: 40%;
 }
 .navLinks li{
     list-style: none;
@@ -65,10 +59,10 @@ form{
 
 @media screen and (max-width:1024px){
     .navLinks{
-        width: 40%;
+        width: 45%;
     }
     form{
-        width: 40%;
+        width: 45%;
     }
 }
 @media screen and (max-width:768px){
@@ -113,3 +107,4 @@ form{
         transform: translate(0px);
     }
 }
+
