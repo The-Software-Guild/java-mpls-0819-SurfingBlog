@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link type="text/css"rel="stylesheet" href="css/break.css"/>
+
+        <title>SurfSpot</title>
+    </head>
+    <body>
+        <!-- Main Body of Page -->
+        <nav>
+            <div class="logo">
+                <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
+            </div>
+
+            <div class="row m-4">
+                <div class="col text-center m-3">
+                    <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/beaches" class="btn btn-outline-primary btn-lg">Beaches</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
+                </div>
+            </div>
+            <div class ="col-md-3 text-center" id="beach-dropdown" >
+                <div class="col-9">
+                    <select id="beach" name="beachId" class="form-control" >
+                        <a class="dropdown-item" href="#">
+                            <option th:each="beach : ${allBeaches}" 
+                                    th:value="${beach.id}" 
+                                    th:text="${beach.name}"></a>
+                        </option>
+
+                    </select>
+                </div>
+
+                <p id = "beachId"></p>
+            </div>
+        </nav>
+
+
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+<!--                            <th>Beach</th>-->
+<!--                            <th>Latitude</th>
+                            <th>Longitude</th>-->
+                            <th>Details</th>
+<!--                            <th>Edit</th>
+                            <th>Delete</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="break : ${allBreaks}">
+                            <td th:text="${break.id}">Break ID</td>
+                            <td th:text="${break.name}">Break Name</td>
+<!--                            <td th:text="${break.beach.name}">Beach Name</td>-->
+<!--                            <td th:text="${break.latitude}">Latitude</td>
+                            <td th:text="${break.longitude}">Longitude</td>-->
+                            <td><a href="#" th:href="@{/breakDetail(id=${break.id})}">Details</a></td>
+                            <!--                            <td><a href="#" th:href="@{/editBreak(id=${break.id})}">Edit</a></td>
+                                                        <td><a href="#" th:href="@{/deleteBreakid=${break.id})}">Delete</a></td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+<!--        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>latitude</th>
+                            <th>longitude</th>
+                        </tr>     
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="latitude" th:text="${selectedBreak.latitude}"></td>
+                            <td id="longitude" th:text="${selectedBreak.longitude}"></td>
+                        </tr>                    
+                    </tbody>                     
+                </table>
+            </div>    
+                         
+               <div class="col-md-4"></div> 
+                            <div class="col-md-4" id="latitude"></div> 
+                            <div class="col-md-4" id="longitude"></div> 
+        </div>
+
+        <div>
+            <p id="blogText" class="text-center" th:text="${selectedBreak.blog}"></p>
+        </div>
+
+
+        <div class="row m-4 border border-dark">
+            <div class="col-3 text-center m-3">
+                <span class="h3">Add Comment</span>
+            </div>
+            <div class="col-7 text-center m-3">
+                <form action="addBreakComment" method="POST">
+                    <div class="form-group row">
+                        <label for="breakComment" class="col-3 col-form-label">
+                            Comment</label>
+                        <div class="col-9">
+                            <input type="text" name="breakComment" 
+                                   id="breakComment" class="form-control"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Break Comment</button>
+                </form>
+            </div>
+        </div>    
+
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>User</th>
+                            <th>Comments</th>
+                        </tr>     
+                    </thead>
+                    <tbody>
+                        <tr th:each="breakComment : ${breakComments}" id="break-user-commentRow">
+                            <td id="userId" th:text="${breakComment.id}"></td>
+                            <td id="userName" th:text="${breakComment.user.username}"></td>
+                            <td id="break-user-comments" 
+                                th:text="${breakComment.commentText}"></td>
+                        <tr></tr>
+                        </tr>                    
+                    </tbody>                     
+                </table>
+            </div>  
+        </div> -->
+
+
+    </div>   
+
+
+    <!-- End main body -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="/break.js"></script>
+</body>
+</html>
+
+
+

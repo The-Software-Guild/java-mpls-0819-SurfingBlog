@@ -19,25 +19,28 @@
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-            <ul class="navLinks">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Beaches</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <li>
-                    <a href="#">Login</a>
-                </li>
+            
+            <div class="row m-4">
+                <div class="col text-center m-3">
+                    <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/beach" class="btn btn-outline-primary btn-lg">Beaches</a>
+                </div>
+            </div>
+            <div class ="col-md-3 text-center" id="beach-dropdown" >
+                <div class="col-9">
+                    <select id="beach" name="beachId" class="form-control" >
+                        <a class="dropdown-item" href="#">
+                            <option th:each="beach : ${allBeaches}" 
+                                    th:value="${beach.id}" 
+                                    th:text="${beach.name}"></a>
+                        </option>
 
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+                    </select>
+                </div>
+
+                <p id = "beachId"></p>
 
             </div>
         </nav>
@@ -72,7 +75,35 @@
 
         </div>
 
+        <div id="carouselitem" class="carousel slide col-md-8" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselitem" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselitem" data-slide-to="1"></li>
+                <li data-target="#carouselitem" data-slide-to="2"></li>
+            </ol>
+            <ul class="carousel-inner" width="50%" height="300px">
+                <li class="carousel-item active">
+                    <img class="d-block" src="Images/sky-2603741_1280.jpg" alt="First"/>
+                </li>
+                <li class="carousel-item">
+                    <img class="d-block" src="Images/sunset-1777313_1280-2.jpg" alt="Second"/>
+                </li>
+                <li class="carousel-item">
+                    <img class="d-block" src="Images/waterfall-969228_1280.jpg" alt="Third"/>
+                </li>
+            </ul>
+            <a class="carousel-control-prev" href="#carouselitem" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselitem" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
         <!-- Optional JavaScript -->
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import sg.surfingblog.newpackage.dao.InvalidIdException;
 import sg.surfingblog.newpackage.dao.SurfingDao;
@@ -36,25 +37,29 @@ public class BeachController {
     UserDao uDao;
     
     @GetMapping("beach")
-    public String displayBeach(HttpServletRequest request, Model model) throws InvalidIdException{
+    public String displayBeach(Model model) throws InvalidIdException{
+        
+        //On initial load, default data will be for the first beach
+        int defaultBeachId = 302;
         
         List<Beach> allBeaches = sDao.getAllBeaches();
         model.addAttribute("allBeaches", allBeaches);
         
-//        int selectedBeachId = Integer.parseInt(request.getParameter("id"));
-        Beach selectedBeach = sDao.getBeachById(301);
+        Beach selectedBeach = sDao.getBeachById(defaultBeachId);
         model.addAttribute("selectedBeach", selectedBeach);
  
-        List<Break> allBreaksForBeach = sDao.getBreaksByBeach(301);
+        List<Break> allBreaksForBeach = sDao.getBreaksByBeach(defaultBeachId);
         model.addAttribute("allBreaksForBeach", allBreaksForBeach);
         
-        List<BeachComment> beachComments = sDao.getAllBeachComments();
+        List<BeachComment> beachComments = sDao.getCommentsByBeach(defaultBeachId);
         model.addAttribute("beachComments", beachComments);
         
         
         return "beach";
         
     }
+    
+
     
    @PostMapping("addBeachComment")
    public String addBeachComment(BeachComment newBeachComment, HttpServletRequest request) throws SurfingDaoException, InvalidIdException {
