@@ -8,6 +8,8 @@ package sg.surfingblog.controllers;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,15 +66,35 @@ public class BeachController {
    @PostMapping("addBeachComment")
    public String addBeachComment(BeachComment newBeachComment, HttpServletRequest request) throws SurfingDaoException, InvalidIdException {
        
-       Beach testBeach = sDao.getBeachById(301);
-       SiteUser testUser = uDao.getUserById(1);
+      String userName = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+      SiteUser user = uDao.getUserByUsername(userName);
+      
+      int id = Integer.parseInt(request.getParameter("id"));
+       
+       Beach testBeach = sDao.getBeachById(id);
+       SiteUser testUser = uDao.getUserById(user.getId());
        
        newBeachComment.setBeach(testBeach);
        newBeachComment.setUser(testUser);
        
        sDao.addBeachComment(newBeachComment);
        
-       return "redirect:/beach";
+       return "redirect:/beachDetails?id="+id;
+       
+   }
+   
+   @GetMapping("deleteBeachComment")
+   public String deleteBeachComment(BeachComment newBeachComment, HttpServletRequest request) throws SurfingDaoException, InvalidIdException {
+       
+      
+      int id = Integer.parseInt(request.getParameter("id"));
+      
+      int beachId = sDao.getBeachCommentById(id).getBeach().getId();
+      
+       
+      sDao.deleteBeachComment(id);
+       
+        return "redirect:/beachDetails?id="+beachId;
        
    }
    

@@ -132,7 +132,7 @@ public class UserDbDao implements UserDao {
 
         user.setId(newId);
 
-        String roleInsert = "INSERT INT user_role (user_id, role_id) VALUES (?,?)";
+        String roleInsert = "INSERT INTO user_role (user_id, role_id) VALUES (?,?);";
         for (Role toAdd : user.getRoles()) {
 
             int roleRowsAffected = jdbc.update(roleInsert, newId, toAdd.getId());

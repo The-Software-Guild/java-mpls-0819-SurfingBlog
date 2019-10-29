@@ -44,10 +44,12 @@ public class BeachesController {
     }
     
     
-    @GetMapping("beachDetails")
+    @GetMapping("beachDetails{id}")
     public String displayBeachDetails(HttpServletRequest request, Model model) throws InvalidIdException{
         
         int id = Integer.parseInt(request.getParameter("id"));
+        
+     
         
         Beach selectedBeach = sDao.getBeachById(id);
         model.addAttribute("selectedBeach", selectedBeach);
