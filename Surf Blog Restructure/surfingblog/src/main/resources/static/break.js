@@ -1,4 +1,24 @@
 
+$(document).ready(function () {
+    clearMapDiv();
+    var latitude = $('#latitude').val();
+    var longitude = $('#longitude').val();
+    loadMap(latitude, longitude);
+})
+
+function loadMap(latitude, longitude) {
+    var url = 'https://maps.googleapis.com/maps/api/staticmap?center=' + latitude + ',' + longitude + '&zoom=12&size=400x400&maptype=roadmap&key=AIzaSyAspsZdPfCpFU26I_TYDy2JnvHx7e3ZGwE';
+    var imgTag = '<img align="middle" src="' + url + '">' 
+    
+    $('#map').append(imgTag)
+    
+}
+
+function clearMapDiv() {
+    $('#map').empty();
+}
+
+
 $('#break-dropdown').on('change', function () {
     var breakId = $('#break-dropdown').find('option:selected').val();
     getBreakById(breakId);
@@ -69,7 +89,7 @@ function getBreakComments(breakId) {
                 div3 += breakCommentId
                 div3 += '</div>'
                 div3 += '</div>';
-                
+
                 $('#userId').append(div3);
                 $('#userName').append(div2);
                 $('#break-user-comments').append(div);

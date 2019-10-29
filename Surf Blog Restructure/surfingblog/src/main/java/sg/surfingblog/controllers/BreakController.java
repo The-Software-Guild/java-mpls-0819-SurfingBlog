@@ -19,6 +19,7 @@ import sg.surfingblog.newpackage.dao.InvalidIdException;
 import sg.surfingblog.newpackage.dao.SurfingDao;
 import sg.surfingblog.newpackage.dao.SurfingDaoException;
 import sg.surfingblog.newpackage.dao.UserDao;
+import sg.surfingblog.newpackage.models.Beach;
 import sg.surfingblog.newpackage.models.Break;
 import sg.surfingblog.newpackage.models.BreakComment;
 import sg.surfingblog.newpackage.models.SiteUser;
@@ -36,7 +37,7 @@ public class BreakController {
     @Autowired
     UserDao uDao;
 
-    @GetMapping("break")
+    @GetMapping("/break")
     public String displayBreak(Model model) throws InvalidIdException {
 
 //        int id = Integer.parseInt(request.getParameter("id"));
@@ -51,7 +52,7 @@ public class BreakController {
         return "break";
     }
 
-    @GetMapping("breakDetail")
+    @GetMapping("/breakDetail")
     public String breakDetail(Integer id, Model model) throws InvalidIdException {
         Break beachBreak = sDao.getBreakById(id);
         model.addAttribute("beachBreak", beachBreak);
@@ -62,7 +63,7 @@ public class BreakController {
         return "breakDetail";
     }
 
-    @PostMapping("addBreakComment")
+    @PostMapping("/addBreakComment")
     public String addBreakComment(BreakComment newBreakComment, HttpServletRequest request) throws InvalidIdException, SurfingDaoException {
         String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         SiteUser user = uDao.getUserByUsername(userName);
@@ -79,14 +80,34 @@ public class BreakController {
         return "redirect:/breakDetail?id=" + id;
     }
 
-    @GetMapping("deleteBreakComment")
+    @GetMapping("/deleteBreakComment")
     public String deleteBreakComment(Integer id, HttpServletRequest request) throws InvalidIdException {
-        
+
         int breakId = sDao.getBreakCommentById(id).getBeachBreak().getId();
-        
+
         sDao.deleteBreakComment(id);
-        
+
         return "redirect:/breakDetail?id=" + breakId;
+    }
+
+    @GetMapping("/editBreak")
+    public String editBreak(Integer id, Model model) throws InvalidIdException {
+        Break beachBreak = sDao.getBreakById(id);
+        List<Beach> beaches = sDao.getAllBeaches();
+        model.addAttribute("beachBreak", beachBreak);
+        model.addAttribute("beaches", beaches);
+        return "editBreak";
+    }
+
+    @PostMapping("/editBreak")
+    public String performEditBreak(Break beachBreak, HttpServletRequest request) throws InvalidIdException, SurfingDaoException {
+        String beachId = request.getParameter("beachId");
+
+        beachBreak.setBeach(sDao.getBeachById(Integer.parseInt(beachId)));
+
+        sDao.updateBreak(beachBreak);
+
+        return "redirect:/break";
     }
 
 }
