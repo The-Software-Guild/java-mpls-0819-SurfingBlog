@@ -26,8 +26,4 @@ $('#beach-dropdown').on('change', function () {
 
   alert(beachId + " has been selected.");
 
-
-
-
-
 });
