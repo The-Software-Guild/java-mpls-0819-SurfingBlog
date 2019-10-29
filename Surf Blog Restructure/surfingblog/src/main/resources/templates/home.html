@@ -22,6 +22,11 @@
 
             <div class="row m-4">
                 <div class="col text-center m-3">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="/admin" class="btn btn-outline-primary btn-lg">Admin</a>
+                    </div>
+                </div>
+                <div class="col text-center m-3">
                     <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
                 </div>
                 <div class="col text-center m-3">
@@ -31,12 +36,10 @@
                     <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
                 </div>
             </div>
-
-                <p id = "beachId"></p>
+            
+            <div sec:authorize="!isAuthenticated()">
+                <span><a href="/login">Login</a></span>
             </div>
-        </nav>
-        <div class="container">  
-            <h2>Home Page</h2>
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
                       method="POST" 
@@ -53,16 +56,12 @@
                             type="submit">Logout</button>
                 </form>
             </div>
+        </nav>
+        <div class="container">  
 
-            <p>
-                The landing page of our application - anyone can get here, including anonymous users.
-            </p>
+            <!--<div sec:authorize="isAuthenticated()">
 
-            <div sec:authorize="isAuthenticated()">
-                <p>
-                    This is only visible to users who are logged in.
-                </p>
-            </div>
+            </div>-->
 
         </div>
 
