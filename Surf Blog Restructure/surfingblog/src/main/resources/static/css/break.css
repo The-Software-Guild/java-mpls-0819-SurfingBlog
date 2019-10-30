@@ -3,7 +3,9 @@
     padding: 0px;
     box-sizing: border-box;
 }
-
+.logo{
+    padding-top: 8px;
+}
 nav{
     display: flex;
     justify-content: space-around;

@@ -6,7 +6,9 @@
 body{
     background-color: rgb(100, 218, 237);  
 }
-
+.logo{
+    padding-top: 8px;
+}
 .btn{
  
     color: white;

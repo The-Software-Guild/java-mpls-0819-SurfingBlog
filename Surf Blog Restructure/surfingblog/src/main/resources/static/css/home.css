@@ -15,6 +15,9 @@ nav{
     background-color: cornflowerblue;
     z-index: auto;
 }
+.logo{
+    padding-top: 8px;
+}
 .d-block{
     width: 100%;
     max-height: 600px;
