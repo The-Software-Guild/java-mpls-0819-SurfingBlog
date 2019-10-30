@@ -66,40 +66,17 @@
 ​
         </nav>
 
-            <div class="row m-4">
-                <div class="col text-center m-3">
-                    <h1>Beaches</h1>
+        <div class="row m-4 color-9">
+            <div class="col text-center m-3">
+                <h1>Beaches</h1>
+                <br>
+
+                <div th:each="beach : ${allBeaches}" class="cl-effect-8">
+                    <a href="#" th:href="@{/beachDetails(id=${beach.id})}"><span th:text="${beach.name}" style="font-size: 35pt"></span></a>
                     <br>
-
-                    <div th:each="beach : ${allBeaches}">
-
-                        <a href="#" th:href="@{/beachDetails(id=${beach.id})}"><h2><span th:text="${beach.name}"></span></h2></a>
-                        <br>
-                    </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-
-
-
-
-
+                </div> 
             </div>
+        </div>
 
             <br>
 
