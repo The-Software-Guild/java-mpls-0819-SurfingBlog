@@ -107,7 +107,7 @@ public class BreakController {
 
         sDao.updateBreak(beachBreak);
 
-        return "redirect:/break";
+        return "redirect:/breakDetail?id=" + beachBreak.getId();
     }
 
 }

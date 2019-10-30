@@ -30,9 +30,11 @@
                 <li>
                     <a href="/break">Breaks</a>
                 </li>
+                <div sec:authorize="!isAuthenticated()">
                 <li>
                     <a href="/login">Login</a>
                 </li>
+                </div>
             </ul>
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
@@ -42,7 +44,7 @@
                            th:name="${_csrf.parameterName}" 
                            th:value="${_csrf.token}"/>
                     <label for="submit">
-                        Hello : <span th:text="${#authentication.name}">
+                        Hello,&nbsp; <span th:text="${#authentication.name}">
                         </span>&nbsp;&nbsp;&nbsp;|
                     </label>
                     <button class="btn btn-link" 

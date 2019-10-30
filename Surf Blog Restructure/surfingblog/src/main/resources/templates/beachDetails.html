@@ -9,38 +9,43 @@
 
 
         <link rel="stylesheet" href="css/Beach.css">
-        
+        <script src="https://cdn.tiny.cloud/1/azjlp04whihefwj8d5yxyfvhs6cnowuxhcugt9bwqd35m2yv/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+            selector: '#commentText'
+            });
+        </script>
 
 
         <title>SurfSpot</title>
     </head>
     <body onload= "loadDefaultValues();">
 
-       <nav>
+        <nav>
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-
-            <div class="row m-4">
-                <div class="col text-center m-3">
+             <ul class="navLinks">
+                <li>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a href="/admin" class="btn btn-outline-primary btn-lg">Admin</a>
+                        <a href="/admin">Admin</a>
                     </div>
+                </li>
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+                <li>
+                    <a href="/beaches">Beaches</a>
+                </li>
+                <li>
+                    <a href="/break">Breaks</a>
+                </li>
+                <div sec:authorize="!isAuthenticated()">
+                <li>
+                    <a href="/login">Login</a>
+                </li>
                 </div>
-                <div class="col text-center m-3">
-                    <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
-                </div>
-                <div class="col text-center m-3">
-                    <a href="/beaches" class="btn btn-outline-primary btn-lg">Beaches</a>
-                </div>
-                <div class="col text-center m-3">
-                    <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
-                </div>
-            </div>
-            
-            <div sec:authorize="!isAuthenticated()">
-                <span><a href="/login">Login</a></span>
-            </div>
+            </ul>
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
                       method="POST" 
@@ -49,7 +54,7 @@
                            th:name="${_csrf.parameterName}" 
                            th:value="${_csrf.token}"/>
                     <label for="submit">
-                        Hello : <span th:text="${#authentication.name}">
+                        Hello,&nbsp; <span th:text="${#authentication.name}">
                         </span>&nbsp;&nbsp;&nbsp;|
                     </label>
                     <button class="btn btn-link" 
@@ -57,6 +62,12 @@
                             type="submit">Logout</button>
                 </form>
             </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
         </nav>
 
 
@@ -65,7 +76,7 @@
             <br>
 
             <h1><span th:text="${selectedBeach.name}"></span></h1>
-            
+
 
             <br>
 
@@ -78,76 +89,77 @@
             </div>
 
             <br>
-            
-            
+
+
             <div class ="row" id = "breaks2">
-                
+
                 <div th:each="break : ${allBreaksForBeach}" class = "col-4 text-center">
 
-                    <a href="#" th:href="@{/break(id=${break.id})}"><h3>Go to...<br><span th:text="${break.name}"></span></h3></a>
-                        
-                    </div> 
+                    <a href="#" th:href="@{/breakDetail(id=${break.id})}"><h3>Go to...<br><span th:text="${break.name}"></span></h3></a>
+
+                </div> 
 
             </div>
 
             <br>
 
             <div sec:authorize="hasRole('ROLE_USER')">
-            <div class="row m-4 border border-dark">
-            <div class="col-3 text-center m-3">
-                <span class="h3">Thoughts about <span th:text="${selectedBeach.name}"></span>? <br><br>Add a comment!</span>
-            </div>
-            
-            <div class="col-7 text-center m-3">
-                <form action="addBeachComment" method="POST">
-                    <input type="hidden" 
-                                       th:name="${_csrf.parameterName}" 
-                                       th:value="${_csrf.token}"/>
-                    
-                    <input type="hidden" name="id" th:value="${selectedBeach.id}"/>
-                    <div class="form-group row">
-    
-                        <textarea class ="form-control" name ="commentText" id="commentText" rows="5">
-
-                        </textarea>
+                <div class="row m-3 border border-dark">
+                    <div class="col-3 text-center m-3">
+                        <span class="h3">Thoughts about <span th:text="${selectedBeach.name}"></span>? <br><br>Add a comment!</span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Add Beach Comment</button>
-                </form>
-            </div>
-        </div>
+                    <div class="col-8 text-center m-3">
+                        <form action="addBeachComment" method="POST">
+                            <input type="hidden" 
+                                   th:name="${_csrf.parameterName}" 
+                                   th:value="${_csrf.token}"/>
+
+                            <input type="hidden" name="id" th:value="${selectedBeach.id}"/>
+                            <!--<div class="form-group row">-->
+
+                                <textarea class ="form-control" name ="commentText" id="commentText" rows="5">
+
+                                </textarea>
+                            <button type="submit" class="btn btn-primary">Add Beach Comment</button>
+                            </div>
+
+                            
+                        </form>
+                    <!--</div>-->
+                </div>
             </div>
 
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Comment</th>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Comment</th>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
                             <th>Delete</th>
-                            </div>
+                        </div>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="beachComment : ${beachComments}">
-                            <td th:text="${beachComment.id}">Comment ID</td>
-                            <td th:text="${beachComment.user.username}">User</td>
-                            <td th:text="${beachComment.commentText}">Comment</td>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        </thead>
+                        <tbody>
+                            <tr th:each="beachComment : ${beachComments}">
+                                <td th:text="${beachComment.id}">Comment ID</td>
+                                <td th:text="${beachComment.user.username}">User</td>
+                                <td th:utext="${beachComment.commentText}">Comment</td>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
                             <td><a href="#" th:href="@{/deleteBeachComment(id=${beachComment.id})}">Delete</a></td>
-                            </div>
-                    </tbody>
-                </table>
+                        </div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-            
-            
+
+
 
             <br>
-           
+
 
             <script
                 src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -159,8 +171,8 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
                     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-            
-    
+
+
 
             <script th:inline="javascript">
 
@@ -236,7 +248,7 @@
 
             </script>
 
-            
+
 
         </script>
 
