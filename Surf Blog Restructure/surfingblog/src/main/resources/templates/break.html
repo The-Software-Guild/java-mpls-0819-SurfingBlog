@@ -61,63 +61,6 @@
                 <div class="line3"></div>
             </div>
         </nav>
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-<!--                            <th>Beach</th>-->
-<!--                            <th>Latitude</th>
-                            <th>Longitude</th>-->
-                            <th>Details</th>
-<!--                            <th>Edit</th>
-                            <th>Delete</th>-->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="break : ${allBreaks}">
-                            <td th:text="${break.id}">Break ID</td>
-                            <td th:text="${break.name}">Break Name</td>
-<!--                            <td th:text="${break.beach.name}">Beach Name</td>-->
-<!--                            <td th:text="${break.latitude}">Latitude</td>
-                            <td th:text="${break.longitude}">Longitude</td>-->
-                            <td><a href="#" th:href="@{/breakDetail(id=${break.id})}">Details</a></td>
-                            <!--                            <td><a href="#" th:href="@{/editBreak(id=${break.id})}">Edit</a></td>
-                                                        <td><a href="#" th:href="@{/deleteBreakid=${break.id})}">Delete</a></td>-->
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-<!--        <div class="row m-4 border border-dark">
-=======
-            ​
-        </nav>
-
-
-        <!--        <div class="row m-4 border border-dark">
-                    <div class="col text-center m-3">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Details</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="break : ${allBreaks}">
-                                    <td th:text="${break.id}">Break ID</td>
-                                    <td th:text="${break.name}">Break Name</td>
-                                    <td><a href="#" th:href="@{/breakDetail(id=${break.id})}">Details</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>-->
-
         <div class="row m-4 color-9">
             <div class="col text-center m-3">
                 <h1>Beach Breaks</h1>
@@ -128,30 +71,7 @@
                     <br>
                 </div> 
             </div>
-        </div>    
-
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>User</th>
-                            <th>Comments</th>
-                        </tr>     
-                    </thead>
-                    <tbody>
-                        <tr th:each="breakComment : ${breakComments}" id="break-user-commentRow">
-                            <td id="userId" th:text="${breakComment.id}"></td>
-                            <td id="userName" th:text="${breakComment.user.username}"></td>
-                            <td id="break-user-comments" 
-                                th:text="${breakComment.commentText}"></td>
-                        <tr></tr>
-                        </tr>                    
-                    </tbody>                     
-                </table>
-            </div>  
-        </div>   
+        </div>  
     <!-- End main body -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
