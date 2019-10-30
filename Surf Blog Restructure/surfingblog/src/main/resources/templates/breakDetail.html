@@ -74,7 +74,6 @@
                             type="submit">Logout</button>
                 </form>
             </div>
-​
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
@@ -122,15 +121,16 @@
 <!--                <div class="col-6 text-right"><strong>Blog</strong></div>-->
                 <div class="col-10 offset-md-1 text-middle">
                     <span th:text="${beachBreak.blog}">display blog</span>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a href="#" th:href="@{/editBreak(id=${beachBreak.id})}">Edit</a>
-                    <br>
+                    </div>
                 </div> 
 
                 
 
             </div>
 
-
+            <div sec:authorize="hasRole('ROLE_USER')">
             <div class="row m-4 border border-dark">
                 <div class="col-3 text-center m-3">
                     <span class="h3">Add Break Comment</span>
@@ -154,6 +154,7 @@
                     </form>
                 </div>
             </div>
+            </div>
 
             <div class="row m-4 border border-dark">
                 <div class="col text-center m-3">
@@ -163,7 +164,9 @@
                                 <th>ID</th>
                                 <th>User</th>
                                 <th>Comment</th>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
                                 <th>Delete</th>
+                                </div>
                             </tr>
                         </thead>
                         <tbody>
@@ -171,7 +174,9 @@
                                 <td th:text="${breakComment.id}">Comment ID</td>
                                 <td th:text="${breakComment.user.username}">User</td>
                                 <td th:text="${breakComment.commentText}">Comment</td>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
                                 <td><a href="#" th:href="@{/deleteBreakComment(id=${breakComment.id})}">Delete</a></td>
+                                </div>
                         </tbody>
                     </table>
                 </div>

@@ -8,7 +8,7 @@
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 
-        <link rel="stylesheet" href="css/Beach.css">
+        <link rel="stylesheet" href="css/beach.css">
 
 
         <title>SurfSpot</title>
@@ -19,11 +19,7 @@
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-​
-​
-​
             <ul class="navLinks">
-​
                 <li>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <a href="/admin">Admin</a>
@@ -38,13 +34,11 @@
                 <li>
                     <a href="/break">Breaks</a>
                 </li>
-​
                 <div sec:authorize="!isAuthenticated()">
                 <li>
                     <a href="/login">Login</a>
                 </li>
                 </div>
-​
             </ul>
 ​
             <div sec:authorize="isAuthenticated()">
