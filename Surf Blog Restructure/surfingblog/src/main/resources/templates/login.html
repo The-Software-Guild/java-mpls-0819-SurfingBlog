@@ -19,6 +19,12 @@
 
             <h3 th:if="${#request.getParameter('login_error') == '1'}">
                 Wrong id or password!</h3>
+            
+            <div>
+                <a href="/createNewAccount" class="btn btn-outline-primary btn-lg">Create new account</a>
+            </div>
+            
+            <br>
 
             <form class="form-horizontal" 
                   role="form" 
@@ -57,6 +63,8 @@
                 </div>
             </form>    
         </div>
+
+
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
