@@ -23,13 +23,7 @@ form{
     font-family: 'Poppins', sans-serif;
     color: rgb(240, 240, 240);
 }
-.carousel{
-    display: block;
-    margin-top: 50px;
-    position: absolute;
-    z-index: -1;
-    margin-left: 230px;
-}
+
 .logo{
     color: rgb(240, 240, 240);
     letter-spacing: 4px;
@@ -65,10 +59,10 @@ form{
 
 @media screen and (max-width:1024px){
     .navLinks{
-        width: 45%;
+        width: 35%;
     }
     form{
-        width: 45%;
+        width: 35%;
     }
 }
 @media screen and (max-width:768px){
@@ -84,7 +78,7 @@ form{
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 40%;
+            width: 35%;
             transform: translateX(100%);
             transition: transform 0.5s ease-in;
     }
@@ -95,7 +89,7 @@ form{
         display: block;
     }
     form{
-        width: 40%;
+        width: 30%;
     }  
 }
 
