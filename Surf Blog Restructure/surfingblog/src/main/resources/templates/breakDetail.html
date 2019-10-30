@@ -20,15 +20,12 @@
     </head>
     <body>
         <!-- Main Body of Page -->
-<nav>
+        <p></p>
+        <nav>
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-​
-​
-​
             <ul class="navLinks">
-​
                 <li>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <a href="/admin">Admin</a>
@@ -43,15 +40,12 @@
                 <li>
                     <a href="/break">Breaks</a>
                 </li>
-​
                 <div sec:authorize="!isAuthenticated()">
-                <li>
-                    <a href="/login">Login</a>
-                </li>
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
                 </div>
-​
             </ul>
-​
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
                       method="POST" 
@@ -73,11 +67,8 @@
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
-​
         </nav>
-
         <br>
-
         <div class ="container" style="text-align: center" id="map">
         </div>
 
@@ -113,46 +104,46 @@
                 </div>
                 <hr>
 
-<!--                <div class="col-6 text-right"><strong>Blog</strong></div>-->
+                <!--                <div class="col-6 text-right"><strong>Blog</strong></div>-->
                 <div class="col-10 offset-md-1 text-middle">
                     <span th:utext="${beachBreak.blog}">display blog</span>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <span style="float:right"><a href="#" th:href="@{/editBreak(id=${beachBreak.id})}">Edit blog post</a></span>
                     </div>
-                    
+
                 </div> 
 
 
-                
+
 
             </div>
 
             <div sec:authorize="hasRole('ROLE_USER')">
-            <div class="row m-4 border border-dark">
-                <div class="col-3 text-center m-3">
-                    <span class="h3">Add Break Comment</span>
-                </div>
-                
-                <div class="col-8 text-center m-3">
-                    <form action="addBreakComment" method="POST">
-                        <input type="hidden" 
-                               th:name="${_csrf.parameterName}" 
-                               th:value="${_csrf.token}"/>
-                        
-                                <input type="hidden" id="breakId" name="breakId" th:value="${beachBreak.id}"/>
-                                <div class="form-group row">
-                                    
-                                    <textarea class ="form-control" name ="commentText" id="commentText" rows="5">
+                <div class="row m-4 border border-dark">
+                    <div class="col-3 text-center m-3">
+                        <span class="h3">Add Break Comment</span>
+                    </div>
+
+                    <div class="col-8 text-center m-3">
+                        <form action="addBreakComment" method="POST">
+                            <input type="hidden" 
+                                   th:name="${_csrf.parameterName}" 
+                                   th:value="${_csrf.token}"/>
+
+                            <input type="hidden" id="breakId" name="breakId" th:value="${beachBreak.id}"/>
+                            <div class="form-group row">
+
+                                <textarea class ="form-control" name ="commentText" id="commentText" rows="5">
 
                                 </textarea>
-                                </div>
-                           
-                        
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">Add Break Comment</button>
-                    </form>
+
+
+                            <button type="submit" class="btn btn-primary">Add Break Comment</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <div class="row m-4 border border-dark">
@@ -163,19 +154,19 @@
                                 <th>ID</th>
                                 <th>User</th>
                                 <th>Comment</th>
-                                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <th>Delete</th>
-                                </div>
-                            </tr>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <th>Delete</th>
+                        </div>
+                        </tr>
                         </thead>
                         <tbody>
                             <tr th:each="breakComment : ${breakComments}">
                                 <td th:text="${breakComment.id}">Comment ID</td>
                                 <td th:text="${breakComment.user.username}">User</td>
                                 <td th:utext="${breakComment.commentText}">Comment</td>
-                                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <td><a href="#" th:href="@{/deleteBreakComment(id=${breakComment.id})}">Delete</a></td>
-                                </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <td><a href="#" th:href="@{/deleteBreakComment(id=${breakComment.id})}">Delete</a></td>
+                        </div>
                         </tbody>
                     </table>
                 </div>
