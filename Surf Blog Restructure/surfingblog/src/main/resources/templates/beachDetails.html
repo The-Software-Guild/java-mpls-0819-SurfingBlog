@@ -16,31 +16,38 @@
     </head>
     <body onload= "loadDefaultValues();">
 
-       <nav>
+        <nav>
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-
-            <div class="row m-4">
-                <div class="col text-center m-3">
+​
+​
+​
+            <ul class="navLinks">
+​
+                <li>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a href="/admin" class="btn btn-outline-primary btn-lg">Admin</a>
+                        <a href="/admin">Admin</a>
                     </div>
+                </li>
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+                <li>
+                    <a href="/beaches">Beaches</a>
+                </li>
+                <li>
+                    <a href="/break">Breaks</a>
+                </li>
+​
+                <div sec:authorize="!isAuthenticated()">
+                <li>
+                    <a href="/login">Login</a>
+                </li>
                 </div>
-                <div class="col text-center m-3">
-                    <a href="/home" class="btn btn-outline-primary btn-lg">Home</a>
-                </div>
-                <div class="col text-center m-3">
-                    <a href="/beaches" class="btn btn-outline-primary btn-lg">Beaches</a>
-                </div>
-                <div class="col text-center m-3">
-                    <a href="/break" class="btn btn-outline-primary btn-lg">Breaks</a>
-                </div>
-            </div>
-            
-            <div sec:authorize="!isAuthenticated()">
-                <span><a href="/login">Login</a></span>
-            </div>
+​
+            </ul>
+​
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
                       method="POST" 
@@ -49,7 +56,7 @@
                            th:name="${_csrf.parameterName}" 
                            th:value="${_csrf.token}"/>
                     <label for="submit">
-                        Hello : <span th:text="${#authentication.name}">
+                        Hello,&nbsp; <span th:text="${#authentication.name}">
                         </span>&nbsp;&nbsp;&nbsp;|
                     </label>
                     <button class="btn btn-link" 
@@ -57,6 +64,13 @@
                             type="submit">Logout</button>
                 </form>
             </div>
+​
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+​
         </nav>
 
 

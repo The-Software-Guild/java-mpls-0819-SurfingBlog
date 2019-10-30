@@ -17,8 +17,11 @@
             <div class="logo">
                 <h1><img src="Images/Logo1.jpg" height="100" width="100" />TheSurfSpot</h1>
             </div>
-
+​
+​
+​
             <ul class="navLinks">
+​
                 <li>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <a href="/admin">Admin</a>
@@ -33,11 +36,15 @@
                 <li>
                     <a href="/break">Breaks</a>
                 </li>
+​
+                <div sec:authorize="!isAuthenticated()">
                 <li>
                     <a href="/login">Login</a>
                 </li>
+                </div>
+​
             </ul>
-
+​
             <div sec:authorize="isAuthenticated()">
                 <form class="form-inline" 
                       method="POST" 
@@ -46,7 +53,7 @@
                            th:name="${_csrf.parameterName}" 
                            th:value="${_csrf.token}"/>
                     <label for="submit">
-                        Hello : <span th:text="${#authentication.name}">
+                        Hello,&nbsp; <span th:text="${#authentication.name}">
                         </span>&nbsp;&nbsp;&nbsp;|
                     </label>
                     <button class="btn btn-link" 
@@ -54,117 +61,36 @@
                             type="submit">Logout</button>
                 </form>
             </div>
-
+​
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
-
+​
         </nav>
 
 
         <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-<!--                            <th>Beach</th>-->
-<!--                            <th>Latitude</th>
-                            <th>Longitude</th>-->
                             <th>Details</th>
-<!--                            <th>Edit</th>
-                            <th>Delete</th>-->
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="break : ${allBreaks}">
                             <td th:text="${break.id}">Break ID</td>
                             <td th:text="${break.name}">Break Name</td>
-<!--                            <td th:text="${break.beach.name}">Beach Name</td>-->
-<!--                            <td th:text="${break.latitude}">Latitude</td>
-                            <td th:text="${break.longitude}">Longitude</td>-->
                             <td><a href="#" th:href="@{/breakDetail(id=${break.id})}">Details</a></td>
-                            <!--                            <td><a href="#" th:href="@{/editBreak(id=${break.id})}">Edit</a></td>
-                                                        <td><a href="#" th:href="@{/deleteBreakid=${break.id})}">Delete</a></td>-->
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-
-<!--        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>latitude</th>
-                            <th>longitude</th>
-                        </tr>     
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="latitude" th:text="${selectedBreak.latitude}"></td>
-                            <td id="longitude" th:text="${selectedBreak.longitude}"></td>
-                        </tr>                    
-                    </tbody>                     
-                </table>
-            </div>    
-                         
-               <div class="col-md-4"></div> 
-                            <div class="col-md-4" id="latitude"></div> 
-                            <div class="col-md-4" id="longitude"></div> 
-        </div>
-
-        <div>
-            <p id="blogText" class="text-center" th:text="${selectedBreak.blog}"></p>
-        </div>
-
-
-        <div class="row m-4 border border-dark">
-            <div class="col-3 text-center m-3">
-                <span class="h3">Add Comment</span>
-            </div>
-            <div class="col-7 text-center m-3">
-                <form action="addBreakComment" method="POST">
-                    <div class="form-group row">
-                        <label for="breakComment" class="col-3 col-form-label">
-                            Comment</label>
-                        <div class="col-9">
-                            <input type="text" name="breakComment" 
-                                   id="breakComment" class="form-control"/>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Break Comment</button>
-                </form>
-            </div>
-        </div>    
-
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>User</th>
-                            <th>Comments</th>
-                        </tr>     
-                    </thead>
-                    <tbody>
-                        <tr th:each="breakComment : ${breakComments}" id="break-user-commentRow">
-                            <td id="userId" th:text="${breakComment.id}"></td>
-                            <td id="userName" th:text="${breakComment.user.username}"></td>
-                            <td id="break-user-comments" 
-                                th:text="${breakComment.commentText}"></td>
-                        <tr></tr>
-                        </tr>                    
-                    </tbody>                     
-                </table>
-            </div>  
-        </div> -->
 
 
     </div>   
