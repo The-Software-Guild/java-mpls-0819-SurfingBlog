@@ -216,7 +216,7 @@ public class SurfingDbDaoTest {
 
             assertEquals(3, allComments.size());
 
-            BeachComment firstComment = allComments.get(0);
+            BeachComment firstComment = allComments.get(2);
             assertEquals(firstBC.getId(), firstComment.getId());
             assertEquals(2, firstComment.getUser().getId());
             assertEquals(addedBeach.getId(), firstComment.getBeach().getId());
@@ -228,7 +228,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBeach.getId(), secondComment.getBeach().getId());
             assertEquals("vel illum qui", secondComment.getCommentText());
 
-            BeachComment thirdComment = allComments.get(2);
+            BeachComment thirdComment = allComments.get(0);
             assertEquals(thirdBC.getId(), thirdComment.getId());
             assertEquals(2, thirdComment.getUser().getId());
             assertEquals(addedBeach.getId(), thirdComment.getBeach().getId());
@@ -319,7 +319,7 @@ public class SurfingDbDaoTest {
 
             assertEquals(3, allComments.size());
 
-            BreakComment firstComment = allComments.get(0);
+            BreakComment firstComment = allComments.get(2);
             assertEquals(addedBC1.getId(), firstComment.getId());
             assertEquals(2, firstComment.getUser().getId());
             assertEquals(addedBreak1.getId(), firstComment.getBeachBreak().getId());
@@ -331,7 +331,7 @@ public class SurfingDbDaoTest {
             assertEquals(addedBreak1.getId(), secondComment.getBeachBreak().getId());
             assertEquals("dolor sit amet, consectetu", secondComment.getCommentText());
 
-            BreakComment thirdComment = allComments.get(2);
+            BreakComment thirdComment = allComments.get(0);
             assertEquals(addedBC3.getId(), thirdComment.getId());
             assertEquals(2, thirdComment.getUser().getId());
             assertEquals(addedBreak1.getId(), thirdComment.getBeachBreak().getId());

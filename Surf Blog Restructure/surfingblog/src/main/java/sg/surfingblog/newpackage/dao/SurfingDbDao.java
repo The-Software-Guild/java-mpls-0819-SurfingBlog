@@ -75,7 +75,8 @@ public class SurfingDbDao implements SurfingDao {
                 + "From beach_comment bc\n"
                 + "Inner Join `User` u On bc.userid = u.id\n"
                 + "Inner Join beach be On bc.beachid = be.id\n"
-                + "Where beachId = ?";
+                + "Where beachId = ? \n"
+                + "ORDER BY bc.id DESC";
 
         List<BeachComment> toReturn = template.query(query, new BeachCommentMapper(), id);
 
@@ -96,7 +97,8 @@ public class SurfingDbDao implements SurfingDao {
                 + "Inner Join `User` u On brc.userid = u.id\n"
                 + "Inner Join break br On brc.breakid = br.id\n"
                 + "Inner Join beach be On br.beachid = be.id \n"
-                + "Where breakId = ?";
+                + "Where breakId = ? \n"
+                + "ORDER BY brc.id DESC";
 
         List<BreakComment> toReturn = template.query(query, new BreakCommentMapper(), id);
 
