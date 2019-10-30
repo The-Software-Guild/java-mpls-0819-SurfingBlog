@@ -107,9 +107,9 @@ values
 
 insert into beach (id, `name`, zipcode)
 values
-('301','Beach A','96701'),
-('302','Beach B','96712'),
-('303','Beach C','96707');
+('301','Beach A','99501'),
+('302','Beach B','85001'),
+('303','Beach C','10001');
 
 insert into break (id, `name`, beachId, latitude, longitude, blog)
 values

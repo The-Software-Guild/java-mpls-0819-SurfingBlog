@@ -3,9 +3,7 @@
     padding: 0px;
     box-sizing: border-box;
 }
-body{
-    background-color: rgb(100, 218, 237);  
-}
+
 nav{
     display: flex;
     justify-content: space-around;
@@ -124,3 +122,26 @@ form{
   display: inline-block;
   font-size: 16px;
 }
+
+body {
+  background-color: rgb(100, 218, 237);  
+/*  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  padding: 3em 0;*/
+}
+
+/*svg {
+  width: 100%;
+}
+
+.squiggle {
+  animation:shift 1s linear infinite;
+}*/
+
+/*@keyframes shift {
+  from { transform:translateX(0); }
+  to { transform:translateX(-20px); }
+}*/
+
