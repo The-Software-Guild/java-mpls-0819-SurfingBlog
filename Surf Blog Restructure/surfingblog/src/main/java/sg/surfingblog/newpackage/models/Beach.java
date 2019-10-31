@@ -5,6 +5,8 @@
  */
 package sg.surfingblog.newpackage.models;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  *
  * @author Chad
@@ -13,6 +15,7 @@ public class Beach {
 
     private int id;
     
+    @NotBlank(message = "A beach must have a name")
     private String name;
 
     private int zipCode;
