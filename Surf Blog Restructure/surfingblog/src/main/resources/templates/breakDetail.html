@@ -105,7 +105,7 @@
                 <hr>
 
                 <!--                <div class="col-6 text-right"><strong>Blog</strong></div>-->
-                <div class="col-10 offset-md-1 text-middle">
+                <div class="col-10 offset-md-1 text-center">
                     <span th:utext="${beachBreak.blog}">display blog</span>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <span style="float:right"><a href="#" th:href="@{/editBreak(id=${beachBreak.id})}">Edit blog post</a></span>

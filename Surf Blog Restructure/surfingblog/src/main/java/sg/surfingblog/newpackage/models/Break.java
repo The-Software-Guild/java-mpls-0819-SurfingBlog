@@ -6,6 +6,11 @@
 package sg.surfingblog.newpackage.models;
 
 import java.math.BigDecimal;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.core.userdetails.User;
 
 /**
@@ -16,14 +21,24 @@ public class Break {
 
     private int id;
 
+    @NotBlank(message = "Name must not be empty.")
     private String name;
 
     private Beach beach;
 
+    @NotNull(message = "Latitude name must not be empty.")
+    @DecimalMin(value = "-90.000001", inclusive = false)
+    @DecimalMax(value = "90.000001", inclusive = false)
+    @Digits(integer = 9, fraction = 6, message = "Latitude must be 9 digits with 6 decimal places.")
     private BigDecimal latitude;
 
+    @NotNull(message = "Longitude name must not be empty.")
+    @DecimalMin(value = "-180.000001", inclusive = false)
+    @DecimalMax(value = "180.000001", inclusive = false)
+    @Digits(integer = 9, fraction = 6, message = "Longitude must be 9 digits with 6 decimal places.")
     private BigDecimal longitude;
-    
+
+    @NotBlank(message = "Blog must not be empty.")
     private String blog;
 
     /**
